@@ -4,11 +4,8 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 public class CircularlyLinkedList<E> implements List<E> {
-    /**
-     * Store the tail reference instead of the head reference so that
-     * removeFirst, addFirst, addLast can be fast
-     */
-
+    // Store the tail reference instead of the head reference so that
+    // removeFirst, addFirst, addLast can be fast
     private Node<E> tail;
     private int size;
 
