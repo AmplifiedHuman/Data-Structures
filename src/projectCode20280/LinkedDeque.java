@@ -34,13 +34,13 @@ public class LinkedDeque<E> implements Deque<E> {
 	@Override
 	public void addFirst(E e) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void addLast(E e) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override

@@ -1,40 +1,49 @@
 package projectCode20280;
 
 public class LinkedQueue<E> implements Queue<E> {
+	/* Alternatively we can use a Singly Linked List if in our implementation
+	 * there is a tail pointer (getLast and addLast is fast)
+	 */
+	private DoublyLinkedList<E> dllist;
+
+	public LinkedQueue() {
+		dllist = new DoublyLinkedList<>();
+	}
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
+		LinkedQueue<Integer> lq = new LinkedQueue<>();
+		for (int i = 0; i < 10; i++) {
+			lq.enqueue(i);
+		}
+		for (int i = 0; i < 10; i++) {
+			System.out.print(lq.dequeue() + " ");
+		}
+		System.out.println();
 	}
 
 	@Override
 	public int size() {
-		// TODO Auto-generated method stub
-		return 0;
+		return dllist.size();
 	}
 
 	@Override
 	public boolean isEmpty() {
-		// TODO Auto-generated method stub
-		return false;
+		return dllist.isEmpty();
 	}
 
 	@Override
 	public void enqueue(E e) {
-		// TODO Auto-generated method stub
-		
+		dllist.addLast(e);
 	}
 
 	@Override
 	public E first() {
-		// TODO Auto-generated method stub
-		return null;
+		return dllist.get(0);
 	}
 
 	@Override
 	public E dequeue() {
-		// TODO Auto-generated method stub
-		return null;
+		return dllist.removeFirst();
 	}
 
 }
