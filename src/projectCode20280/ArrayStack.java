@@ -35,16 +35,31 @@ public class ArrayStack<E> implements Stack<E> {
         System.out.println();
     }
 
+    /**
+     * Returns the number of elements in the stack.
+     *
+     * @return number of elements in the stack
+     */
     @Override
     public int size() {
         return size;
     }
 
+    /**
+     * Tests whether the stack is empty.
+     *
+     * @return true if the stack is empty, false otherwise
+     */
     @Override
     public boolean isEmpty() {
         return size == 0;
     }
 
+    /**
+     * Inserts an element at the top of the stack.
+     *
+     * @param e the element to be inserted
+     */
     @Override
     public void push(E e) {
         if (size == items.length) {
@@ -55,6 +70,11 @@ public class ArrayStack<E> implements Stack<E> {
         size++;
     }
 
+    /**
+     * Returns, but does not remove, the element at the top of the stack.
+     *
+     * @return top element in the stack (or null if empty)
+     */
     @Override
     public E top() {
         if (isEmpty()) {
@@ -63,6 +83,11 @@ public class ArrayStack<E> implements Stack<E> {
         return items[top];
     }
 
+    /**
+     * Removes and returns the top element from the stack.
+     *
+     * @return element removed (or null if empty)
+     */
     @Override
     public E pop() {
         if (isEmpty()) {

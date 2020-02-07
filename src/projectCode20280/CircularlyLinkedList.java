@@ -47,7 +47,9 @@ public class CircularlyLinkedList<E> implements List<E> {
     }
 
     /**
-     * Returns the size of the list
+     * Return size of list
+     *
+     * @return the size of the list
      */
     @Override
     public int size() {
@@ -55,7 +57,9 @@ public class CircularlyLinkedList<E> implements List<E> {
     }
 
     /**
-     * Returns true if the list is empty, false otherwise
+     * Checks if the CLList is empty
+     *
+     * @return true if the list is empty, false otherwise
      */
     @Override
     public boolean isEmpty() {
@@ -63,7 +67,11 @@ public class CircularlyLinkedList<E> implements List<E> {
     }
 
     /**
-     * Gets an element to a specific index i, throws an IndexOutOfBounds exception if index is invalid
+     * Gets an element from the CLList
+     *
+     * @param i ith index in the list
+     * @return the ith item in list
+     * @throws IndexOutOfBoundsException if invalid index is supplied
      */
     @Override
     public E get(int i) {
@@ -76,7 +84,11 @@ public class CircularlyLinkedList<E> implements List<E> {
     }
 
     /**
-     * Adds an element to a specific index i, throws an IndexOutOfBounds exception if index is invalid
+     * Adds an element to the given index
+     *
+     * @param i ith index in the list
+     * @param e item to be added
+     * @throws IndexOutOfBoundsException if invalid index is supplied
      */
     @Override
     public void add(int i, E e) {
@@ -102,7 +114,11 @@ public class CircularlyLinkedList<E> implements List<E> {
     }
 
     /**
-     * Removes and returns an element at a specific index i, throws an IndexOutOfBounds exception if index is invalid
+     * Removes and returns an element at a specific index
+     *
+     * @param i ith index in the list
+     * @return the removed item
+     * @throws IndexOutOfBoundsException if invalid index is supplied
      */
     @Override
     public E remove(int i) {
@@ -127,7 +143,10 @@ public class CircularlyLinkedList<E> implements List<E> {
     }
 
     /**
-     * Removes an element from the start of the list, throws NoSuchElementException if not possible
+     * Removes an element from the start of the list
+     *
+     * @return the removed item
+     * @throws NoSuchElementException if not possible
      */
     @Override
     public E removeFirst() {
@@ -149,7 +168,10 @@ public class CircularlyLinkedList<E> implements List<E> {
     }
 
     /**
-     * Removes an element from the end of the list, throws NoSuchElementException if not possible
+     * Removes an element from the end of the list
+     *
+     * @return the removed item
+     * @throws NoSuchElementException if not possible
      */
     @Override
     public E removeLast() {
@@ -174,7 +196,9 @@ public class CircularlyLinkedList<E> implements List<E> {
     }
 
     /**
-     * Returns a new instance of a CircularlyLinkedListIterator
+     * Returns an iterator
+     *
+     * @return a new instance of a CircularlyLinkedListIterator
      */
     @Override
     public Iterator<E> iterator() {
@@ -182,7 +206,9 @@ public class CircularlyLinkedList<E> implements List<E> {
     }
 
     /**
-     * Adds an element e to the start of the linked list
+     * Adds an item to the front of the list
+     *
+     * @param e the item to be added
      */
     @Override
     public void addFirst(E e) {
@@ -196,7 +222,9 @@ public class CircularlyLinkedList<E> implements List<E> {
     }
 
     /**
-     * Adds an element e to the end of the linked list
+     * Adds an item to the end of the list
+     *
+     * @param e the item to be added
      */
     @Override
     public void addLast(E e) {
@@ -211,7 +239,9 @@ public class CircularlyLinkedList<E> implements List<E> {
     }
 
     /**
-     * toString method
+     * Override toString method
+     *
+     * @return String representation of DLList
      */
     @Override
     public String toString() {
@@ -232,7 +262,9 @@ public class CircularlyLinkedList<E> implements List<E> {
     }
 
     /**
-     * Rotate the list to change the starting node, throws an exception if size is 0
+     * Rotate the list to change the starting node,
+     *
+     * @throws IndexOutOfBoundsException if size is 0
      */
     public void rotate() {
         if (size == 0) {
@@ -242,7 +274,9 @@ public class CircularlyLinkedList<E> implements List<E> {
     }
 
     /**
-     * Checks if index is between 0 - size-1, throws an IndexOutOfBoundsException if violated
+     * Checks if index is between 0 - size-1,
+     *
+     * @throws IndexOutOfBoundsException when i < 0 or i >= size
      */
     private void checkValidity(int index) {
         if (index < 0 || index >= size) {

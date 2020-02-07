@@ -37,10 +37,15 @@ public class SinglyLinkedList<E> implements List<E> {
         for (String s : sll) {
             System.out.print(s + ", ");
         }
+        System.out.println();
+        sll.reverse();
+        System.out.println(sll);
     }
 
     /**
-     * Returns true if the list is empty, false otherwise
+     * Checks if the SLList is empty
+     *
+     * @return true if the list is empty, false otherwise
      */
     @Override
     public boolean isEmpty() {
@@ -48,7 +53,11 @@ public class SinglyLinkedList<E> implements List<E> {
     }
 
     /**
-     * Gets an element to a specific index i, throws an IndexOutOfBounds exception if index is invalid
+     * Gets an element from the SLList
+     *
+     * @param i ith index in the list
+     * @return the ith item in list
+     * @throws IndexOutOfBoundsException if invalid index is supplied
      */
     @Override
     public E get(int i) {
@@ -61,7 +70,11 @@ public class SinglyLinkedList<E> implements List<E> {
     }
 
     /**
-     * Adds an element to a specific index i, throws an IndexOutOfBounds exception if index is invalid
+     * Adds an element to the given index
+     *
+     * @param i ith index in the list
+     * @param e item to be added
+     * @throws IndexOutOfBoundsException if invalid index is supplied
      */
     @Override
     public void add(int i, E e) {
@@ -81,7 +94,11 @@ public class SinglyLinkedList<E> implements List<E> {
     }
 
     /**
-     * Removes and returns an element at a specific index i, throws an IndexOutOfBounds exception if index is invalid
+     * Removes and returns an element at a specific index
+     *
+     * @param i ith index in the list
+     * @return the removed item
+     * @throws IndexOutOfBoundsException if invalid index is supplied
      */
     @Override
     public E remove(int i) {
@@ -103,7 +120,9 @@ public class SinglyLinkedList<E> implements List<E> {
     }
 
     /**
-     * Returns a new instance of a SinglyLinkedListIterator
+     * Returns an iterator
+     *
+     * @return a new instance of a SinglyLinkedListIterator
      */
     @Override
     public Iterator<E> iterator() {
@@ -111,7 +130,9 @@ public class SinglyLinkedList<E> implements List<E> {
     }
 
     /**
-     * Returns the size of the list
+     * Return size of list
+     *
+     * @return the size of the list
      */
     @Override
     public int size() {
@@ -119,7 +140,10 @@ public class SinglyLinkedList<E> implements List<E> {
     }
 
     /**
-     * Removes an element from the start of the list, throws NoSuchElementException if not possible
+     * Removes an element from the start of the list
+     *
+     * @return the removed item
+     * @throws NoSuchElementException if not possible
      */
     @Override
     public E removeFirst() {
@@ -134,7 +158,10 @@ public class SinglyLinkedList<E> implements List<E> {
     }
 
     /**
-     * Removes an element from the end of the list, throws NoSuchElementException if not possible
+     * Removes an element from the end of the list
+     *
+     * @return the removed item
+     * @throws NoSuchElementException if not possible
      */
     @Override
     public E removeLast() {
@@ -162,7 +189,9 @@ public class SinglyLinkedList<E> implements List<E> {
     }
 
     /**
-     * Adds an element e to the start of the linked list
+     * Adds an item to the front of the list
+     *
+     * @param e the item to be added
      */
     @Override
     public void addFirst(E e) {
@@ -171,7 +200,9 @@ public class SinglyLinkedList<E> implements List<E> {
     }
 
     /**
-     * Adds an element e to the end of the linked list
+     * Adds an item to the end of the list
+     *
+     * @param e the item to be added
      */
     @Override
     public void addLast(E e) {
@@ -188,7 +219,9 @@ public class SinglyLinkedList<E> implements List<E> {
     }
 
     /**
-     * toString method
+     * Override toString method
+     *
+     * @return String representation of SLList
      */
     @Override
     public String toString() {
@@ -206,16 +239,29 @@ public class SinglyLinkedList<E> implements List<E> {
     }
 
     /**
-     * Reverse the order of the SLList using an ArrayStack (can also be done using recursion/iteration)
+     * Reverse the order of the SLList using an ArrayStack
+     * (can also be done using recursion/iteration)
+     *
+     * @throws NoSuchElementException when size is 0
      */
     public void reverse() {
         if (size == 0) {
             throw new NoSuchElementException();
         }
-        ArrayStack<E> stack = new ArrayStack<>();
-        for (E item : this) {
-            stack.push(item);
+        ArrayStack<Node<E>> stack = new ArrayStack<>();
+        Node<E> pointer = head;
+        while (pointer.next != null) {
+            stack.push(pointer);
+            pointer = pointer.next;
         }
+        head = pointer;
+
+        while (!stack.isEmpty()) {
+            pointer.next = stack.top();
+            pointer = pointer.next;
+            stack.pop();
+        }
+        pointer.next = null;
     }
 
     /**
@@ -249,6 +295,7 @@ public class SinglyLinkedList<E> implements List<E> {
         public SinglyLinkedListIterator() {
             pointer = head;
         }
+
         @Override
         public boolean hasNext() {
             return pointer != null;

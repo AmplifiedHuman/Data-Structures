@@ -19,26 +19,51 @@ public class LinkedStack<E> implements Stack<E> {
         System.out.println();
     }
 
+    /**
+     * Returns the number of elements in the stack.
+     *
+     * @return number of elements in the stack
+     */
     @Override
     public int size() {
         return sllist.size();
     }
 
+    /**
+     * Tests whether the stack is empty.
+     *
+     * @return true if the stack is empty, false otherwise
+     */
     @Override
     public boolean isEmpty() {
         return sllist.isEmpty();
     }
 
+    /**
+     * Inserts an element at the top of the stack.
+     *
+     * @param e the element to be inserted
+     */
     @Override
     public void push(E e) {
         sllist.addFirst(e);
     }
 
+    /**
+     * Returns, but does not remove, the element at the top of the stack.
+     *
+     * @return top element in the stack (or null if empty)
+     */
     @Override
     public E top() {
         return sllist.get(0);
     }
 
+    /**
+     * Removes and returns the top element from the stack.
+     *
+     * @return element removed (or null if empty)
+     */
     @Override
     public E pop() {
         return sllist.remove(0);
