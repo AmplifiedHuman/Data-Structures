@@ -206,6 +206,19 @@ public class SinglyLinkedList<E> implements List<E> {
     }
 
     /**
+     * Reverse the order of the SLList using an ArrayStack (can also be done using recursion/iteration)
+     */
+    public void reverse() {
+        if (size == 0) {
+            throw new NoSuchElementException();
+        }
+        ArrayStack<E> stack = new ArrayStack<>();
+        for (E item : this) {
+            stack.push(item);
+        }
+    }
+
+    /**
      * Checks if index is between 0 - size-1, throws an IndexOutOfBoundsException if violated
      */
     private void checkValidity(int index) {

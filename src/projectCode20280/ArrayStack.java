@@ -3,7 +3,7 @@ package projectCode20280;
 import java.util.NoSuchElementException;
 
 public class ArrayStack<E> implements Stack<E> {
-    public static int DEFAULT_CAPACITY = 100;
+    public static final int DEFAULT_CAPACITY = 100;
     private int size;
     private E[] items;
     // stores the top of the stack
