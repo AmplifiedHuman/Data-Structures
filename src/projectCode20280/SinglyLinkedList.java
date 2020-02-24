@@ -38,8 +38,15 @@ public class SinglyLinkedList<E> implements List<E> {
             System.out.print(s + ", ");
         }
         System.out.println();
+        sll.reverseUsingStack();
+        System.out.println(sll);
         sll.reverse();
         System.out.println(sll);
+
+        SinglyLinkedList<String> newCopy = sll.recursiveCopy();
+        newCopy.removeFirst();
+        System.out.println("newCopy: " + newCopy);
+        System.out.println("sll: " + sll);
     }
 
     /**
@@ -244,7 +251,7 @@ public class SinglyLinkedList<E> implements List<E> {
      *
      * @throws NoSuchElementException when size is 0
      */
-    public void reverse() {
+    public void reverseUsingStack() {
         if (size == 0) {
             throw new NoSuchElementException();
         }
@@ -265,12 +272,61 @@ public class SinglyLinkedList<E> implements List<E> {
     }
 
     /**
+     * Method for reversing the SLList in place using recursion
+     */
+    public void reverse() {
+        head = reverseHelper(head);
+    }
+
+    /**
+     * Makes a shallow copy of the SLList
+     *
+     * @return the copied SLList
+     */
+    public SinglyLinkedList<E> recursiveCopy() {
+        SinglyLinkedList<E> sllist = new SinglyLinkedList<>();
+        sllist.head = recursiveCopyHelper(head);
+        sllist.size = this.size;
+        return sllist;
+    }
+
+    /**
      * Checks if index is between 0 - size-1, throws an IndexOutOfBoundsException if violated
      */
     private void checkValidity(int index) {
         if (index < 0 || index >= size) {
             throw new IndexOutOfBoundsException();
         }
+    }
+
+    /**
+     * Helper method for making a shallow copy of the SLList
+     *
+     * @param n head of the SLList
+     * @return the head of the new copy
+     */
+    private Node<E> recursiveCopyHelper(Node<E> n) {
+        if (n == null) {
+            return null;
+        }
+        return new Node<>(n.data, recursiveCopyHelper(n.next));
+    }
+
+    /**
+     * Helper method for reversing the SLList in place using recursion
+     *
+     * @param n the head of SLList to be reversed
+     * @return the reversed SLList
+     */
+    private Node<E> reverseHelper(Node<E> n) {
+        if (n == null || n.next == null) {
+            return n;
+        }
+        Node<E> second = n.next;
+        Node<E> reversed = reverseHelper(n.next);
+        second.next = n;
+        n.next = null;
+        return reversed;
     }
 
     /**
