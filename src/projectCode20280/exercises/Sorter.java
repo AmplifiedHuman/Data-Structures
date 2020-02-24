@@ -6,7 +6,7 @@ import java.util.Random;
 public class Sorter {
     public static void main(String[] args) {
         // size of input
-        int n = 20000;
+        int n = 15000;
         int[] input = generateInput(n);
         // calculate elapse time for bubble sort
         long startTime = System.nanoTime();
@@ -14,6 +14,12 @@ public class Sorter {
         long endTime = System.nanoTime();
         System.out.println("Bubble Sorted Array: " + Arrays.toString(input));
         System.out.printf("Time elapsed for Bubble Sort (%d elements): %fs\n", n, (endTime - startTime) / 1e9);
+        // calculate elapse time for recursive bubble sort
+        startTime = System.nanoTime();
+        recursiveBubbleSort(input);
+        endTime = System.nanoTime();
+        System.out.println("Recursive Bubble Sorted Array: " + Arrays.toString(input));
+        System.out.printf("Time elapsed for Recursive Bubble Sort (%d elements): %fs\n", n, (endTime - startTime) / 1e9);
         // calculate elapse time for selection sort
         input = generateInput(n);
         startTime = System.nanoTime();
@@ -77,6 +83,24 @@ public class Sorter {
                 j--;
             }
         }
+    }
+
+    private static void recursiveBubbleSort(int[] input) {
+        recursiveBubbleSortHelper(input, input.length);
+    }
+
+    private static void recursiveBubbleSortHelper(int[] input, int rem) {
+        if (rem == 0 || rem == 1) {
+            return;
+        }
+        for (int i = 0; i < rem - 1; i++) {
+            if (input[i] > input[i + 1]) {
+                int temp = input[i];
+                input[i] = input[i + 1];
+                input[i + 1] = temp;
+            }
+        }
+        recursiveBubbleSortHelper(input, rem - 1);
     }
 
     // generates an input array of length n with bound n
