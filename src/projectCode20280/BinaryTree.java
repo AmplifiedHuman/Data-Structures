@@ -2,7 +2,6 @@ package projectCode20280;
 
 /**
  * An interface for a binary tree, in which each node has at most two children.
- *
  */
 public interface BinaryTree<E> extends Tree<E> {
 
