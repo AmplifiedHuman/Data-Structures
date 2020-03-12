@@ -14,10 +14,15 @@ public class LinkedBinaryTree<E extends Comparable<E>> extends AbstractBinaryTre
 
     public static void main(String[] args) {
         LinkedBinaryTree<Integer> bt = new LinkedBinaryTree<>();
-        int[] arr = {12, 25, 31, 58, 36, 42, 90, 62, 75};
+        int[] arr = {12, 25, 31, 58, 36, 42, 90, 62, 75, 8, 18};
         for (int i : arr) {
             bt.insert(i);
         }
+        System.out.println("bt: " + bt.size() + " " + bt);
+        bt.clear();
+        bt.addRoot(5);
+        bt.addLeft(bt.root(), 3);
+        bt.addRight(bt.root(), 9);
         System.out.println("bt: " + bt.size() + " " + bt);
     }
 
