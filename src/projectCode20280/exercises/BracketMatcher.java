@@ -27,11 +27,19 @@ public class BracketMatcher {
     }
 
     public static void main(String[] args) {
-        String[] inputs = {"[]]()()", "c[d]", "a{b[c]d}e", "a{b(c]d}e", "a[b{c}d]e}", "a{b(c) ",
-                "][]][][[]][]][][[[", "(((abc))((d)))))", "(((abc))((d)))"};
+        String[] inputs = {
+                "[]]()()",
+                "c[d]",
+                "a{b[c]d}e",
+                "a{b(c]d}e",
+                "a[b{c}d]e}",
+                "a{b(c) ",
+                "][]][][[]][]][][[[",
+                "(((abc))((d)))))",
+                "(((abc))((d)))"
+        };
         for (String s : inputs) {
             System.out.println(checkParenthesis(s));
         }
-
     }
 }

@@ -68,5 +68,4 @@ public class LinkedStack<E> implements Stack<E> {
     public E pop() {
         return sllist.remove(0);
     }
-
 }

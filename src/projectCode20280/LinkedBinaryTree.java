@@ -29,16 +29,14 @@ public class LinkedBinaryTree<E extends Comparable<E>> extends AbstractBinaryTre
     /**
      * Factory function to create a new node storing element e.
      */
-    protected Node<E> createNode(E e, Node<E> parent,
-                                 Node<E> left, Node<E> right) {
+    protected Node<E> createNode(E e, Node<E> parent, Node<E> left, Node<E> right) {
         return new Node<>(e, parent, left, right);
     }
 
     /**
-     * Verifies that a Position belongs to the appropriate class, and is
-     * not one that has been previously removed. Note that our current
-     * implementation does not actually verify that the position belongs
-     * to this particular list instance.
+     * Verifies that a Position belongs to the appropriate class, and is not one that has been
+     * previously removed. Note that our current implementation does not actually verify that the
+     * position belongs to this particular list instance.
      *
      * @param p a Position (that should belong to this tree)
      * @return the underlying Node instance for the position
@@ -150,7 +148,6 @@ public class LinkedBinaryTree<E extends Comparable<E>> extends AbstractBinaryTre
         return p;
     }
 
-
     /**
      * Creates a new left child of Position p storing element e and returns its Position.
      *
@@ -160,8 +157,7 @@ public class LinkedBinaryTree<E extends Comparable<E>> extends AbstractBinaryTre
      * @throws IllegalArgumentException if p is not a valid Position for this tree
      * @throws IllegalArgumentException if p already has a left child
      */
-    public Position<E> addLeft(Position<E> p, E e)
-            throws IllegalArgumentException {
+    public Position<E> addLeft(Position<E> p, E e) throws IllegalArgumentException {
         Node<E> node = validate(p);
         if (left(node) != null) {
             throw new IllegalArgumentException("p already has a left child");
@@ -180,8 +176,7 @@ public class LinkedBinaryTree<E extends Comparable<E>> extends AbstractBinaryTre
      * @throws IllegalArgumentException if p is not a valid Position for this tree.
      * @throws IllegalArgumentException if p already has a right child
      */
-    public Position<E> addRight(Position<E> p, E e)
-            throws IllegalArgumentException {
+    public Position<E> addRight(Position<E> p, E e) throws IllegalArgumentException {
         Node<E> node = validate(p);
         if (right(node) != null) {
             throw new IllegalArgumentException("p already has a left child");
@@ -207,8 +202,8 @@ public class LinkedBinaryTree<E extends Comparable<E>> extends AbstractBinaryTre
     }
 
     /**
-     * Attaches trees t1 and t2, respectively, as the left and right subtree of the
-     * leaf Position p. As a side effect, t1 and t2 are set to empty trees.
+     * Attaches trees t1 and t2, respectively, as the left and right subtree of the leaf Position p.
+     * As a side effect, t1 and t2 are set to empty trees.
      *
      * @param p  a leaf of the tree
      * @param t1 an independent tree whose structure becomes the left child of p
@@ -216,8 +211,8 @@ public class LinkedBinaryTree<E extends Comparable<E>> extends AbstractBinaryTre
      * @throws IllegalArgumentException if p is not a valid Position for this tree
      * @throws IllegalArgumentException if p is not a leaf
      */
-    public void attach(Position<E> p, LinkedBinaryTree<E> t1,
-                       LinkedBinaryTree<E> t2) throws IllegalArgumentException {
+    public void attach(Position<E> p, LinkedBinaryTree<E> t1, LinkedBinaryTree<E> t2)
+            throws IllegalArgumentException {
         Node<E> n = validate(p);
         if (t1 == null || t2 == null) {
             throw new IllegalArgumentException("t1 or t2 cannot be null.");
@@ -232,7 +227,8 @@ public class LinkedBinaryTree<E extends Comparable<E>> extends AbstractBinaryTre
     }
 
     /**
-     * Removes the node at Position p, uses Hibbard Deletion to delete a position if it has two children.
+     * Removes the node at Position p, uses Hibbard Deletion to delete a position if it has two
+     * children.
      *
      * @param p the relevant Position
      * @return element that was removed
@@ -335,5 +331,4 @@ public class LinkedBinaryTree<E extends Comparable<E>> extends AbstractBinaryTre
             return right;
         }
     }
-} 
-
+}

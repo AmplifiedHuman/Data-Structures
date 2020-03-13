@@ -168,7 +168,6 @@ public class DoublyLinkedList<E> implements List<E> {
             }
             addBetween(e, pointer.prev, pointer);
         }
-
     }
 
     /**

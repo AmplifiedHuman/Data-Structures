@@ -1,13 +1,11 @@
 package projectCode20280;
 
 /**
- * Realization of a circular FIFO queue as an adaptation of a
- * CircularlyLinkedList. This provides one additional method not part of the
- * general Queue interface. A call to rotate() is a more efficient simulation of
- * the combination enqueue(dequeue()). All operations are performed in constant
- * time.
+ * Realization of a circular FIFO queue as an adaptation of a CircularlyLinkedList. This provides
+ * one additional method not part of the general Queue interface. A call to rotate() is a more
+ * efficient simulation of the combination enqueue(dequeue()). All operations are performed in
+ * constant time.
  */
-
 public class LinkedCircularQueue<E> implements Queue<E> {
     private CircularlyLinkedList<E> cllist;
 

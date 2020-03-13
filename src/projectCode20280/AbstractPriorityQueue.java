@@ -1,22 +1,19 @@
 package projectCode20280;
 
-
 import java.util.Comparator;
 
 /**
  * An abstract base class to ease the implementation of the PriorityQueue interface.
- * <p>
- * The base class provides four means of support:
- * 1) It defines a PQEntry class as a concrete implementation of the
- * entry interface
- * 2) It provides an instance variable for a general Comparator and a
- * protected method, compare(a, b), that makes use of the comparator.
- * 3) It provides a boolean checkKey method that verifies that a given key
- * is appropriate for use with the comparator
- * 4) It provides an isEmpty implementation based upon the abstract size() method.
+ *
+ * <p>The base class provides four means of support: 1) It defines a PQEntry class as a concrete
+ * implementation of the entry interface 2) It provides an instance variable for a general
+ * Comparator and a protected method, compare(a, b), that makes use of the comparator. 3) It
+ * provides a boolean checkKey method that verifies that a given key is appropriate for use with the
+ * comparator 4) It provides an isEmpty implementation based upon the abstract size() method.
  */
-public abstract class AbstractPriorityQueue<K, V> implements PriorityQueue<K, V> {
-    //---------------- nested PQEntry class ----------------
+public abstract class AbstractPriorityQueue<K extends Comparable<K>, V>
+        implements PriorityQueue<K, V> {
+    // ---------------- nested PQEntry class ----------------
 
     /**
      * The comparator defining the ordering of keys in the priority queue.
@@ -38,7 +35,7 @@ public abstract class AbstractPriorityQueue<K, V> implements PriorityQueue<K, V>
      * Creates an empty priority queue based on the natural ordering of its keys.
      */
     protected AbstractPriorityQueue() {
-        this(new DefaultComparator<K>());
+        this(new DefaultComparator<>());
     }
 
     /**
@@ -53,7 +50,8 @@ public abstract class AbstractPriorityQueue<K, V> implements PriorityQueue<K, V>
      */
     protected boolean checkKey(K key) throws IllegalArgumentException {
         try {
-            return (comp.compare(key, key) == 0);  // see if key can be compared to itself
+            // see if key can be compared to itself
+            return (comp.compare(key, key) == 0);
         } catch (ClassCastException e) {
             throw new IllegalArgumentException("Incompatible key");
         }
@@ -70,12 +68,12 @@ public abstract class AbstractPriorityQueue<K, V> implements PriorityQueue<K, V>
     }
 
     /**
-     * A concrete implementation of the Entry interface to be used within
-     * a PriorityQueue implementation.
+     * A concrete implementation of the Entry interface to be used within a PriorityQueue
+     * implementation.
      */
     protected static class PQEntry<K, V> implements Entry<K, V> {
-        private K k;  // key
-        private V v;  // value
+        private K k; // key
+        private V v; // value
 
         public PQEntry(K key, V value) {
             k = key;
@@ -99,5 +97,10 @@ public abstract class AbstractPriorityQueue<K, V> implements PriorityQueue<K, V>
         protected void setValue(V value) {
             v = value;
         }
-    } //----------- end of nested PQEntry class -----------
+
+        @Override
+        public String toString() {
+            return String.format("%s:%s", k, v);
+        }
+    } // ----------- end of nested PQEntry class -----------
 }

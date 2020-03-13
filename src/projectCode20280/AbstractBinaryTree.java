@@ -5,12 +5,11 @@ import java.util.List;
 
 /**
  * An abstract base class providing some functionality of the BinaryTree interface.
- * <p>
- * The following five methods remain abstract, and must be implemented
- * by a concrete subclass: size, root, parent, left, right.
+ *
+ * <p>The following five methods remain abstract, and must be implemented by a concrete subclass:
+ * size, root, parent, left, right.
  */
-public abstract class AbstractBinaryTree<E> extends AbstractTree<E>
-        implements BinaryTree<E> {
+public abstract class AbstractBinaryTree<E> extends AbstractTree<E> implements BinaryTree<E> {
 
     /**
      * Returns the Position of p's sibling (or null if no sibling exists).
@@ -63,7 +62,7 @@ public abstract class AbstractBinaryTree<E> extends AbstractTree<E>
      */
     @Override
     public Iterable<Position<E>> children(Position<E> p) {
-        List<Position<E>> snapshot = new ArrayList<>(2);    // max capacity of 2
+        List<Position<E>> snapshot = new ArrayList<>(2); // max capacity of 2
         if (left(p) != null) {
             snapshot.add(left(p));
         }
@@ -74,8 +73,8 @@ public abstract class AbstractBinaryTree<E> extends AbstractTree<E>
     }
 
     /**
-     * Adds positions of the subtree rooted at Position p to the given
-     * snapshot using an inorder traversal
+     * Adds positions of the subtree rooted at Position p to the given snapshot using an inorder
+     * traversal
      *
      * @param p        Position serving as the root of a subtree
      * @param snapshot a list to which results are appended
@@ -114,4 +113,3 @@ public abstract class AbstractBinaryTree<E> extends AbstractTree<E>
         return inorder();
     }
 }
-

@@ -6,10 +6,9 @@ import java.util.List;
 
 /**
  * An abstract base class providing some functionality of the Tree interface.
- * <p>
- * The following three methods remain abstract, and must be
- * implemented by a concrete subclass: root, parent, children. Other
- * methods implemented in this class may be overridden to provide a
+ *
+ * <p>The following three methods remain abstract, and must be implemented by a concrete subclass:
+ * root, parent, children. Other methods implemented in this class may be overridden to provide a
  * more direct and efficient implementation.
  */
 public abstract class AbstractTree<E> implements Tree<E> {
@@ -89,7 +88,7 @@ public abstract class AbstractTree<E> implements Tree<E> {
         return size() == 0;
     }
 
-    //---------- support for computing depth of nodes and height of (sub)trees ----------
+    // ---------- support for computing depth of nodes and height of (sub)trees ----------
 
     /**
      * Returns the number of levels separating Position p from the root.
@@ -107,13 +106,13 @@ public abstract class AbstractTree<E> implements Tree<E> {
 
     /**
      * Returns the height of the tree.
-     * <p>
-     * Note: This implementation works, but runs in O(n^2) worst-case time.
+     *
+     * <p>Note: This implementation works, but runs in O(n^2) worst-case time.
      */
-    private int heightBad() {             // works, but quadratic worst-case time
+    private int heightBad() { // works, but quadratic worst-case time
         int h = 0;
         for (Position<E> p : positions()) {
-            if (isExternal(p))                // only consider leaf positions
+            if (isExternal(p)) // only consider leaf positions
                 h = Math.max(h, depth(p));
         }
 
@@ -127,13 +126,12 @@ public abstract class AbstractTree<E> implements Tree<E> {
      * @throws IllegalArgumentException if p is not a valid Position for this tree.
      */
     public int height(Position<E> p) throws IllegalArgumentException {
-        int h = 0;                          // base case if p is external
-        for (Position<E> c : children(p))
-            h = Math.max(h, 1 + height(c));
+        int h = 0; // base case if p is external
+        for (Position<E> c : children(p)) h = Math.max(h, 1 + height(c));
         return h;
     }
 
-    //---------- support for various iterations of a tree ----------
+    // ---------- support for various iterations of a tree ----------
 
     /**
      * Returns an iterator of the elements stored in the tree.
@@ -156,8 +154,8 @@ public abstract class AbstractTree<E> implements Tree<E> {
     }
 
     /**
-     * Adds positions of the subtree rooted at Position p to the given
-     * snapshot using a preorder traversal
+     * Adds positions of the subtree rooted at Position p to the given snapshot using a preorder
+     * traversal
      *
      * @param p        Position serving as the root of a subtree
      * @param snapshot a list to which results are appended
@@ -185,8 +183,8 @@ public abstract class AbstractTree<E> implements Tree<E> {
     }
 
     /**
-     * Adds positions of the subtree rooted at Position p to the given
-     * snapshot using a postorder traversal
+     * Adds positions of the subtree rooted at Position p to the given snapshot using a postorder
+     * traversal
      *
      * @param p        Position serving as the root of a subtree
      * @param snapshot a list to which results are appended
@@ -238,7 +236,7 @@ public abstract class AbstractTree<E> implements Tree<E> {
         return snapshot;
     }
 
-    //---------------- nested ElementIterator class ----------------
+    // ---------------- nested ElementIterator class ----------------
     /* This class adapts the iteration produced by positions() to return elements. */
     private class ElementIterator implements Iterator<E> {
         Iterator<Position<E>> posIterator = positions().iterator();

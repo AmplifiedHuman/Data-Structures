@@ -13,33 +13,38 @@ public class Sorter {
         bubbleSort(input);
         long endTime = System.nanoTime();
         System.out.println("Bubble Sorted Array: " + Arrays.toString(input));
-        System.out.printf("Time elapsed for Bubble Sort (%d elements): %fs\n", n, (endTime - startTime) / 1e9);
+        System.out.printf(
+                "Time elapsed for Bubble Sort (%d elements): %fs\n", n, (endTime - startTime) / 1e9);
         // calculate elapse time for recursive bubble sort
         startTime = System.nanoTime();
         recursiveBubbleSort(input);
         endTime = System.nanoTime();
         System.out.println("Recursive Bubble Sorted Array: " + Arrays.toString(input));
-        System.out.printf("Time elapsed for Recursive Bubble Sort (%d elements): %fs\n", n, (endTime - startTime) / 1e9);
+        System.out.printf(
+                "Time elapsed for Recursive Bubble Sort (%d elements): %fs\n",
+                n, (endTime - startTime) / 1e9);
         // calculate elapse time for selection sort
         input = generateInput(n);
         startTime = System.nanoTime();
         selectionSort(input);
         endTime = System.nanoTime();
         System.out.println("Selection Sorted Array: " + Arrays.toString(input));
-        System.out.printf("Time elapsed for Selection Sort (%d elements): %fs\n", n, (endTime - startTime) / 1e9);
+        System.out.printf(
+                "Time elapsed for Selection Sort (%d elements): %fs\n", n, (endTime - startTime) / 1e9);
         // calculate elapse time for insertion sort
         input = generateInput(n);
         startTime = System.nanoTime();
         insertionSort(input);
         endTime = System.nanoTime();
         System.out.println("Insertion Sorted Array: " + Arrays.toString(input));
-        System.out.printf("Time elapsed for Insertion Sort (%d elements): %fs\n", n, (endTime - startTime) / 1e9);
-
+        System.out.printf(
+                "Time elapsed for Insertion Sort (%d elements): %fs\n", n, (endTime - startTime) / 1e9);
     }
 
     // Worst case: O(n ^ 2)
     // Best case: O(n ^ 2) for this implementation (can be shortened to O(n)
-    // if we check if for 0 swaps in each iteration, if so terminate outer loop as the list is already sorted)
+    // if we check if for 0 swaps in each iteration, if so terminate outer loop as the list is already
+    // sorted)
     private static void bubbleSort(int[] input) {
         for (int i = 0; i < input.length - 1; i++) {
             for (int j = 0; j < input.length - 1 - i; j++) {

@@ -246,8 +246,8 @@ public class SinglyLinkedList<E> implements List<E> {
     }
 
     /**
-     * Reverse the order of the SLList using an ArrayStack
-     * (can also be done using recursion/iteration)
+     * Reverse the order of the SLList using an ArrayStack (can also be done using
+     * recursion/iteration)
      *
      * @throws NoSuchElementException when size is 0
      */

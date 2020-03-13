@@ -105,5 +105,4 @@ public class ArrayStack<E> implements Stack<E> {
             super("Stack is full.");
         }
     }
-
 }
