@@ -241,7 +241,7 @@ public class CircularlyLinkedList<E> implements List<E> {
     /**
      * Override toString method
      *
-     * @return String representation of DLList
+     * @return String representation of CLList
      */
     @Override
     public String toString() {

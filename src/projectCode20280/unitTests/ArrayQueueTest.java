@@ -55,13 +55,13 @@ public class ArrayQueueTest {
         Assertions.assertEquals(2, queue.size());
 
         queue = new ArrayQueue<>(100);
-        // Try loading the stack to full
+        // Try loading the queue to full
         for (int i = 0; i < 100; i++) {
             queue.enqueue("a");
         }
         try {
             queue.enqueue("a");
-            fail("Stack should be full");
+            fail("Queue should be full");
         } catch (RuntimeException ex) {
             // test passed, do nothing
         }

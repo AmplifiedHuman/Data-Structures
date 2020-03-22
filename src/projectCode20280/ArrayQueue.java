@@ -19,7 +19,7 @@ public class ArrayQueue<E> implements Queue<E> {
     @SuppressWarnings("unchecked")
     public ArrayQueue(int capacity) {
         if (capacity < 0) {
-            throw new IllegalArgumentException("Size of stack can't be negative");
+            throw new IllegalArgumentException("Size of queue can't be negative");
         }
         items = (E[]) new Object[capacity];
         size = 0;
