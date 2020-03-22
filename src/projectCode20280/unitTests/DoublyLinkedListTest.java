@@ -3,17 +3,17 @@ package projectCode20280.unitTests;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import projectCode20280.CircularlyLinkedList;
+import projectCode20280.DoublyLinkedList;
 import projectCode20280.List;
 
 import java.util.NoSuchElementException;
 
-public class ListUnitTest {
+public class DoublyLinkedListTest {
     private List<String> list;
 
     @BeforeEach
     void init() {
-        list = new CircularlyLinkedList<>();
+        list = new DoublyLinkedList<>();
     }
 
     @Test
