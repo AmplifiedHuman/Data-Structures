@@ -1,5 +1,7 @@
 package projectCode20280;
 
+import java.util.Iterator;
+
 public class LinkedQueue<E> implements Queue<E> {
     /* Alternatively we can use a Singly Linked List if in our implementation
      * there is a tail pointer (getLast and addLast is fast)
@@ -69,5 +71,15 @@ public class LinkedQueue<E> implements Queue<E> {
     @Override
     public E dequeue() {
         return dllist.removeFirst();
+    }
+
+    @Override
+    public String toString() {
+        return dllist.toString();
+    }
+
+    @Override
+    public Iterator<E> iterator() {
+        return dllist.iterator();
     }
 }

@@ -1,6 +1,6 @@
 package projectCode20280;
 
-public interface Queue<E> {
+public interface Queue<E> extends Iterable<E> {
     /**
      * Returns the number of elements in the queue.
      *

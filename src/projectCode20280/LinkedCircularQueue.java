@@ -1,5 +1,7 @@
 package projectCode20280;
 
+import java.util.Iterator;
+
 /**
  * Realization of a circular FIFO queue as an adaptation of a CircularlyLinkedList. This provides
  * one additional method not part of the general Queue interface. A call to rotate() is a more
@@ -72,5 +74,15 @@ public class LinkedCircularQueue<E> implements Queue<E> {
     @Override
     public E dequeue() {
         return cllist.removeFirst();
+    }
+
+    @Override
+    public String toString() {
+        return cllist.toString();
+    }
+
+    @Override
+    public Iterator<E> iterator() {
+        return cllist.iterator();
     }
 }

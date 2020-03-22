@@ -1,5 +1,6 @@
 package projectCode20280;
 
+import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 public class ArrayQueue<E> implements Queue<E> {
@@ -121,9 +122,47 @@ public class ArrayQueue<E> implements Queue<E> {
         return Math.floorMod(count + 1, items.length);
     }
 
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder("[");
+        int tempStart = front;
+        for (int i = 0; i < size; i++) {
+            sb.append(items[tempStart]);
+            tempStart = increment(tempStart);
+            if (i != size - 1) {
+                sb.append(", ");
+            }
+        }
+        sb.append("]");
+        return sb.toString();
+    }
+
+    @Override
+    public Iterator<E> iterator() {
+        return new ArrayQueueIterator();
+    }
+
     private static class QueueFullException extends RuntimeException {
         public QueueFullException() {
-            super("Stack is full.");
+            super("Queue is full.");
+        }
+    }
+
+    private class ArrayQueueIterator implements Iterator<E> {
+        private int first = front;
+        private int count = 0;
+
+        @Override
+        public boolean hasNext() {
+            return count != size;
+        }
+
+        @Override
+        public E next() {
+            E temp = items[first];
+            first = increment(first);
+            count++;
+            return temp;
         }
     }
 }

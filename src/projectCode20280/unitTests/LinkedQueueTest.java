@@ -85,4 +85,28 @@ public class LinkedQueueTest {
         queue.dequeue();
         Assertions.assertEquals(queue.first(), "A");
     }
+
+    @Test
+    void testIterator() {
+        String[] data = {"a", "b", "c", "d"};
+        queue.enqueue("a");
+        queue.enqueue("b");
+        queue.enqueue("c");
+        queue.enqueue("d");
+
+        Assertions.assertNotNull(queue.iterator());
+        int i = 0;
+        for (String s : queue) {
+            Assertions.assertEquals(s, data[i]);
+            i++;
+        }
+    }
+
+    @Test
+    void testToString() {
+        queue.enqueue("a");
+        Assertions.assertEquals("[a]", queue.toString());
+        queue.enqueue("b");
+        Assertions.assertEquals("[a, b]", queue.toString());
+    }
 }

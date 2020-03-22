@@ -3,6 +3,7 @@ package projectCode20280.exercises;
 import projectCode20280.LinkedStack;
 import projectCode20280.Queue;
 
+import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 public class DoubleStackQueue<E> implements Queue<E> {
@@ -64,5 +65,10 @@ public class DoubleStackQueue<E> implements Queue<E> {
             }
         }
         return output.pop();
+    }
+
+    @Override
+    public Iterator<E> iterator() {
+        throw new UnsupportedOperationException();
     }
 }
