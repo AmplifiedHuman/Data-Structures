@@ -110,4 +110,28 @@ public class ArrayStackTest {
         stack.pop();
         Assertions.assertEquals(stack.top(), "C");
     }
+
+    @Test
+    void testIterator() {
+        String[] data = {"d", "c", "b", "a"};
+        stack.push("a");
+        stack.push("b");
+        stack.push("c");
+        stack.push("d");
+
+        Assertions.assertNotNull(stack.iterator());
+        int i = 0;
+        for (String s : stack) {
+            Assertions.assertEquals(s, data[i]);
+            i++;
+        }
+    }
+
+    @Test
+    void testToString() {
+        stack.push("a");
+        Assertions.assertEquals("[a]", stack.toString());
+        stack.push("b");
+        Assertions.assertEquals("[b, a]", stack.toString());
+    }
 }

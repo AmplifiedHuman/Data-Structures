@@ -4,12 +4,11 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import projectCode20280.LinkedStack;
-import projectCode20280.Stack;
 
 import static org.junit.jupiter.api.Assertions.fail;
 
 public class LinkedStackTest {
-    private Stack<String> stack;
+    private LinkedStack<String> stack;
 
     @BeforeEach
     void init() {
@@ -82,5 +81,29 @@ public class LinkedStackTest {
         Assertions.assertEquals(stack.top(), "B");
         stack.pop();
         Assertions.assertEquals(stack.top(), "C");
+    }
+
+    @Test
+    void testIterator() {
+        String[] data = {"d", "c", "b", "a"};
+        stack.push("a");
+        stack.push("b");
+        stack.push("c");
+        stack.push("d");
+
+        Assertions.assertNotNull(stack.iterator());
+        int i = 0;
+        for (String s : stack) {
+            Assertions.assertEquals(s, data[i]);
+            i++;
+        }
+    }
+
+    @Test
+    void testToString() {
+        stack.push("a");
+        Assertions.assertEquals("[a]", stack.toString());
+        stack.push("b");
+        Assertions.assertEquals("[b, a]", stack.toString());
     }
 }

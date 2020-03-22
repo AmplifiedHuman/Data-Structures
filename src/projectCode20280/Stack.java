@@ -1,6 +1,6 @@
 package projectCode20280;
 
-public interface Stack<E> {
+public interface Stack<E> extends Iterable<E> {
 
     /**
      * Returns the number of elements in the stack.

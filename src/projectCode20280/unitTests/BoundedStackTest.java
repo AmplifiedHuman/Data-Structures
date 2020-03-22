@@ -3,7 +3,7 @@ package projectCode20280.unitTests;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import projectCode20280.ArrayStack;
+import projectCode20280.BoundedStack;
 import projectCode20280.Stack;
 
 import java.util.NoSuchElementException;
@@ -16,7 +16,7 @@ public class BoundedStackTest {
 
     @BeforeEach
     void init() {
-        stack = new ArrayStack<>();
+        stack = new BoundedStack<>(100);
     }
 
     @Test
@@ -54,7 +54,7 @@ public class BoundedStackTest {
         Assertions.assertEquals(stack.top(), "It's");
         Assertions.assertEquals(2, stack.size());
 
-        stack = new ArrayStack<>(100);
+        stack = new BoundedStack<>(100);
         // Try loading the stack to full
         for (int i = 0; i < 100; i++) {
             stack.push("a");
@@ -109,5 +109,30 @@ public class BoundedStackTest {
         Assertions.assertEquals(stack.top(), "B");
         stack.pop();
         Assertions.assertEquals(stack.top(), "C");
+    }
+
+
+    @Test
+    void testIterator() {
+        String[] data = {"d", "c", "b", "a"};
+        stack.push("a");
+        stack.push("b");
+        stack.push("c");
+        stack.push("d");
+
+        Assertions.assertNotNull(stack.iterator());
+        int i = 0;
+        for (String s : stack) {
+            Assertions.assertEquals(s, data[i]);
+            i++;
+        }
+    }
+
+    @Test
+    void testToString() {
+        stack.push("a");
+        Assertions.assertEquals("[a]", stack.toString());
+        stack.push("b");
+        Assertions.assertEquals("[b, a]", stack.toString());
     }
 }

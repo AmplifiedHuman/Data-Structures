@@ -1,8 +1,9 @@
 package projectCode20280;
 
+import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-public class ArrayStack<E> implements Stack<E> {
+public class ArrayStack<E> implements Stack<E>, Iterable<E> {
     public static final int DEFAULT_CAPACITY = 100;
     private int size;
     private E[] items;
@@ -100,9 +101,43 @@ public class ArrayStack<E> implements Stack<E> {
         return temp;
     }
 
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder("[");
+        for (int i = top; i >= 0; i--) {
+            sb.append(items[i]);
+            if (i != 0) {
+                sb.append(", ");
+            }
+        }
+        sb.append("]");
+        return sb.toString();
+    }
+
+    @Override
+    public Iterator<E> iterator() {
+        return new ArrayStackIterator();
+    }
+
     private static class StackFullException extends RuntimeException {
         public StackFullException() {
             super("Stack is full.");
+        }
+    }
+
+    private class ArrayStackIterator implements Iterator<E> {
+        private int index = size - 1;
+
+        @Override
+        public boolean hasNext() {
+            return index >= 0;
+        }
+
+        @Override
+        public E next() {
+            E temp = items[index];
+            index--;
+            return temp;
         }
     }
 }

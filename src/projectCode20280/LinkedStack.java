@@ -1,6 +1,8 @@
 package projectCode20280;
 
-public class LinkedStack<E> implements Stack<E> {
+import java.util.Iterator;
+
+public class LinkedStack<E> implements Stack<E>, Iterable<E> {
     private SinglyLinkedList<E> sllist;
 
     public LinkedStack() {
@@ -67,5 +69,16 @@ public class LinkedStack<E> implements Stack<E> {
     @Override
     public E pop() {
         return sllist.remove(0);
+    }
+
+    @Override
+    public String toString() {
+        return sllist.toString();
+    }
+
+
+    @Override
+    public Iterator<E> iterator() {
+        return sllist.iterator();
     }
 }
