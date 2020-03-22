@@ -1,5 +1,7 @@
 package projectCode20280;
 
+import java.util.Iterator;
+
 public class LinkedDeque<E> implements Deque<E> {
     private DoublyLinkedList<E> dllist;
 
@@ -106,5 +108,15 @@ public class LinkedDeque<E> implements Deque<E> {
     @Override
     public E removeLast() {
         return dllist.removeLast();
+    }
+
+    @Override
+    public Iterator<E> iterator() {
+        return dllist.iterator();
+    }
+
+    @Override
+    public String toString() {
+        return dllist.toString();
     }
 }

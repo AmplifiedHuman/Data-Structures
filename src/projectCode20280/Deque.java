@@ -1,6 +1,6 @@
 package projectCode20280;
 
-public interface Deque<E> {
+public interface Deque<E> extends Iterable<E> {
 
     /**
      * Returns the number of elements in the deque.
