@@ -2,7 +2,7 @@ package projectCode20280.exercises;
 
 public class Palindrome {
     public static boolean isPalindrome(String input) {
-        input = input.toLowerCase().replace(" ", "").replace(",", "").replace("?", "");
+        input = input.toLowerCase().replaceAll("[\\s,?]", "");
         return isPalindromeHelper(input, 0, input.length() - 1);
     }
 
@@ -22,7 +22,9 @@ public class Palindrome {
                 "Top spot",
                 "Was it a cat I saw?",
                 "eva, can I see bees in a cave?",
-                "no lemon, no melon"
+                "no lemon, no melon",
+                "stupid",
+                "?not b ton?"
         };
 
         for (String input : inputs) {
