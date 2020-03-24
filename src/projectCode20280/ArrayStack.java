@@ -101,6 +101,11 @@ public class ArrayStack<E> implements Stack<E>, Iterable<E> {
         return temp;
     }
 
+    /**
+     * Override toString method
+     *
+     * @return String representation of stack
+     */
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder("[");
@@ -114,6 +119,9 @@ public class ArrayStack<E> implements Stack<E>, Iterable<E> {
         return sb.toString();
     }
 
+    /**
+     * @return an iterator for the stack
+     */
     @Override
     public Iterator<E> iterator() {
         return new ArrayStackIterator();

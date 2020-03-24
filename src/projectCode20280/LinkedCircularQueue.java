@@ -76,11 +76,19 @@ public class LinkedCircularQueue<E> implements Queue<E> {
         return cllist.removeFirst();
     }
 
+    /**
+     * Override toString method
+     *
+     * @return String representation of queue
+     */
     @Override
     public String toString() {
         return cllist.toString();
     }
 
+    /**
+     * @return an iterator for the queue
+     */
     @Override
     public Iterator<E> iterator() {
         return cllist.iterator();

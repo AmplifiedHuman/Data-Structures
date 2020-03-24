@@ -73,11 +73,19 @@ public class LinkedQueue<E> implements Queue<E> {
         return dllist.removeFirst();
     }
 
+    /**
+     * Override toString method
+     *
+     * @return String representation of queue
+     */
     @Override
     public String toString() {
         return dllist.toString();
     }
 
+    /**
+     * @return an iterator for the queue
+     */
     @Override
     public Iterator<E> iterator() {
         return dllist.iterator();

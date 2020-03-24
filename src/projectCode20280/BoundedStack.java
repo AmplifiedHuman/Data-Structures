@@ -96,7 +96,11 @@ public class BoundedStack<E> implements Stack<E> {
         return temp;
     }
 
-
+    /**
+     * Override toString method
+     *
+     * @return String representation of stack
+     */
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder("[");
@@ -110,6 +114,9 @@ public class BoundedStack<E> implements Stack<E> {
         return sb.toString();
     }
 
+    /**
+     * @return an iterator for the stack
+     */
     @Override
     public Iterator<E> iterator() {
         return new BoundedStackIterator();

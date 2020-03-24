@@ -122,6 +122,11 @@ public class ArrayQueue<E> implements Queue<E> {
         return Math.floorMod(count + 1, items.length);
     }
 
+    /**
+     * Override toString method
+     *
+     * @return String representation of queue
+     */
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder("[");
@@ -137,6 +142,9 @@ public class ArrayQueue<E> implements Queue<E> {
         return sb.toString();
     }
 
+    /**
+     * @return an iterator for the queue
+     */
     @Override
     public Iterator<E> iterator() {
         return new ArrayQueueIterator();

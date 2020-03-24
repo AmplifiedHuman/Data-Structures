@@ -110,11 +110,19 @@ public class LinkedDeque<E> implements Deque<E> {
         return dllist.removeLast();
     }
 
+    /**
+     * @return an iterator for the deque
+     */
     @Override
     public Iterator<E> iterator() {
         return dllist.iterator();
     }
 
+    /**
+     * Override toString method
+     *
+     * @return String representation of deque
+     */
     @Override
     public String toString() {
         return dllist.toString();

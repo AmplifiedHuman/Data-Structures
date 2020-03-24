@@ -231,6 +231,13 @@ public class LinkedBinaryTree<E extends Comparable<E>> extends AbstractBinaryTre
         t2.clear();
     }
 
+    /**
+     * Removes the given item from the tree
+     *
+     * @param val to be removed
+     * @return the removed value
+     * @throws IllegalArgumentException if the item is not in the tree
+     */
     public E remove(E val) {
         Position<E> element = findElement(root, val);
         if (element == null) {
@@ -311,6 +318,11 @@ public class LinkedBinaryTree<E extends Comparable<E>> extends AbstractBinaryTre
         return temp;
     }
 
+    /**
+     * Override toString method
+     *
+     * @return String representation of tree
+     */
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("[");

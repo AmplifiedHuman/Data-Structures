@@ -71,12 +71,19 @@ public class LinkedStack<E> implements Stack<E>, Iterable<E> {
         return sllist.remove(0);
     }
 
+    /**
+     * Override toString method
+     *
+     * @return String representation of stack
+     */
     @Override
     public String toString() {
         return sllist.toString();
     }
 
-
+    /**
+     * @return an iterator for the stack
+     */
     @Override
     public Iterator<E> iterator() {
         return sllist.iterator();
