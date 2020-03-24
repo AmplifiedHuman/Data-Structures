@@ -52,7 +52,7 @@ public abstract class AbstractPriorityQueue<K extends Comparable<K>, V>
         try {
             // see if key can be compared to itself
             return (comp.compare(key, key) == 0);
-        } catch (ClassCastException e) {
+        } catch (Exception e) {
             throw new IllegalArgumentException("Incompatible key");
         }
     }

@@ -212,7 +212,9 @@ public class HeapPriorityQueue<K extends Comparable<K>, V> extends AbstractPrior
      */
     @Override
     public Entry<K, V> insert(K key, V value) throws IllegalArgumentException {
-        checkKey(key);
+        if (!checkKey(key)) {
+            throw new IllegalArgumentException("Invalid key");
+        }
         PQEntry<K, V> newEntry = new PQEntry<>(key, value);
         // add to last node
         heap.add(newEntry);
@@ -252,7 +254,7 @@ public class HeapPriorityQueue<K extends Comparable<K>, V> extends AbstractPrior
     }
 
     /**
-     * Used for debugging purposes only
+     * Used for debugging purposes only, checks heap invariant
      */
     private void sanityCheck() {
         for (int j = 0; j < heap.size(); j++) {
