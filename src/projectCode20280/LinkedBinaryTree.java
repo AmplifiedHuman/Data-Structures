@@ -1,5 +1,7 @@
 package projectCode20280;
 
+import java.util.NoSuchElementException;
+
 /**
  * Concrete implementation of a binary tree using a node-based, linked structure.
  */
@@ -130,12 +132,12 @@ public class LinkedBinaryTree<E extends Comparable<E>> extends AbstractBinaryTre
     public void insert(E e) {
         // Recursively add from root
         root = addRecursive(root, e);
-        size++;
     }
 
     // Recursively add Nodes to binary tree in proper position
     private Node<E> addRecursive(Node<E> p, E e) {
         if (p == null) {
+            size++;
             return createNode(e, null, null, null);
         }
         if (e.compareTo(p.getElement()) > 0) {
@@ -213,29 +215,45 @@ public class LinkedBinaryTree<E extends Comparable<E>> extends AbstractBinaryTre
      */
     public void attach(Position<E> p, LinkedBinaryTree<E> t1, LinkedBinaryTree<E> t2)
             throws IllegalArgumentException {
-        Node<E> n = validate(p);
-        if (t1 == null || t2 == null) {
-            throw new IllegalArgumentException("t1 or t2 cannot be null.");
+        if (t1 == null || t2 == null || t1.size() == 0 || t2.size() == 0) {
+            throw new IllegalArgumentException("t1 or t2 cannot be null or empty trees.");
         }
+        Node<E> n = validate(p);
         if (isInternal(n)) {
             throw new IllegalArgumentException("p is not a leaf.");
         }
         n.left = t1.root;
+        t1.root.parent = n;
         n.right = t2.root;
+        t2.root.parent = n;
+        size += t1.size() + t2.size();
         t1.clear();
         t2.clear();
     }
 
-    /**
-     * Removes the node at Position p, uses Hibbard Deletion to delete a position if it has two
-     * children.
-     *
-     * @param p the relevant Position
-     * @return element that was removed
-     * @throws IllegalArgumentException if p is not a valid Position for this tree.
-     */
-    public E remove(Position<E> p) throws IllegalArgumentException {
-        Node<E> n = validate(p);
+    public E remove(E val) {
+        Position<E> element = findElement(root, val);
+        if (element == null) {
+            throw new NoSuchElementException("Element not in tree");
+        }
+        return remove(element);
+    }
+
+    private Position<E> findElement(Node<E> root, E target) {
+        if (root == null) {
+            return null;
+        }
+        if (root.getElement().compareTo(target) == 0) {
+            return root;
+        }
+        if (root.getElement().compareTo(target) < 0) {
+            return findElement(root.getRight(), target);
+        } else {
+            return findElement(root.getLeft(), target);
+        }
+    }
+
+    private E removeRecursive(Node<E> n) {
         E removed = n.getElement();
         // Gets the number of children node
         int nChildren = ((n.getLeft() == null) ? 0 : 1) + ((n.getRight() == null) ? 0 : 1);
@@ -270,10 +288,27 @@ public class LinkedBinaryTree<E extends Comparable<E>> extends AbstractBinaryTre
                 leftNode = leftNode.right;
             }
             // Copy substitute node to n and delete substitute node
-            n.element = remove(leftNode);
+            n.element = removeRecursive(leftNode);
         }
-        size--;
         return removed;
+    }
+
+    /**
+     * Removes the node at Position p, uses Hibbard Deletion to delete a position if it has two
+     * children.
+     *
+     * @param p the relevant Position
+     * @return element that was removed
+     * @throws IllegalArgumentException if p is not a valid Position for this tree.
+     */
+    public E remove(Position<E> p) throws IllegalArgumentException {
+        Node<E> n = validate(p);
+        if (findElement(n, p.getElement()) == null) {
+            throw new NoSuchElementException("Element not in tree");
+        }
+        E temp = removeRecursive(n);
+        size--;
+        return temp;
     }
 
     public String toString() {
@@ -283,6 +318,8 @@ public class LinkedBinaryTree<E extends Comparable<E>> extends AbstractBinaryTre
             sb.append(p.getElement());
             sb.append(", ");
         }
+        sb.deleteCharAt(sb.length() - 1);
+        sb.deleteCharAt(sb.length() - 1);
         sb.append("]");
         return sb.toString();
     }
