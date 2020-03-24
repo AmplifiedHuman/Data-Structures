@@ -61,26 +61,57 @@ public class HeapPriorityQueue<K extends Comparable<K>, V> extends AbstractPrior
         System.out.println(heap);
     }
 
+    /**
+     * Returns the parent index of a given element index
+     *
+     * @param j the index of element
+     * @return the parent index of element
+     */
     protected int parent(int j) {
         return (j - 1) / 2;
     }
 
+    /**
+     * Returns the left child index of a given element index
+     *
+     * @param j the index of element
+     * @return the left child index of element
+     */
     protected int left(int j) {
         return 2 * j + 1;
     }
 
+    /**
+     * Returns the right child index of a given element index
+     *
+     * @param j the index of element
+     * @return the right child index of element
+     */
     protected int right(int j) {
         return 2 * j + 2;
     }
 
+    /**
+     * Checks if a given element index has a left child
+     *
+     * @param j the index of element to check
+     * @return true if the element has a left child, false otherwise
+     */
     protected boolean hasLeft(int j) {
         return isValidIndex(2 * j + 1) && (heap.get(2 * j + 1) != null);
     }
 
+    /**
+     * Checks if a given element index has a right child
+     *
+     * @param j the index of element to check
+     * @return true if the element has a right child, false otherwise
+     */
     protected boolean hasRight(int j) {
         return isValidIndex(2 * j + 2) && (heap.get(2 * j + 2) != null);
     }
 
+    // helper method for checking if a given index is valid
     private boolean isValidIndex(int i) {
         return i >= 0 && i < size();
     }
