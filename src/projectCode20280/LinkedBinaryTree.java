@@ -18,12 +18,15 @@ public class LinkedBinaryTree<E extends Comparable<E>> extends AbstractBinaryTre
 
     public static void main(String[] args) {
         LinkedBinaryTree<Integer> bt = new LinkedBinaryTree<>();
+        // elements to be inserted
         int[] arr = {12, 25, 31, 58, 36, 42, 90, 62, 75, 8, 18};
+        // construct binary tree of 11 elements
         for (int i : arr) {
             bt.insert(i);
         }
         System.out.println("bt: " + bt.size() + " " + bt);
         bt.clear();
+        // construct binary tree of 3 elements, uses addLeft and addRight
         bt.addRoot(5);
         bt.addLeft(bt.root(), 3);
         bt.addRight(bt.root(), 9);
