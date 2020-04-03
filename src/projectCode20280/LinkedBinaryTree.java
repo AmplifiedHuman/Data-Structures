@@ -7,11 +7,13 @@ import java.util.NoSuchElementException;
  */
 public class LinkedBinaryTree<E extends Comparable<E>> extends AbstractBinaryTree<E> {
     // root of the tree
-    protected Node<E> root = null;
+    protected Node<E> root;
     // number of nodes in the tree
-    private int size = 0;
+    private int size;
 
     public LinkedBinaryTree() {
+        root = null;
+        size = 0;
     }
 
     public static void main(String[] args) {
@@ -260,6 +262,7 @@ public class LinkedBinaryTree<E extends Comparable<E>> extends AbstractBinaryTre
         }
     }
 
+    // removes the given node using Hibbard Deletion
     private E removeRecursive(Node<E> n) {
         E removed = n.getElement();
         // Gets the number of children node
