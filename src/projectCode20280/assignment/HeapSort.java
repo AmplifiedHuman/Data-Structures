@@ -25,7 +25,8 @@ public class HeapSort {
         System.out.println("fasterHeapSort completed.");
     }
 
-    public static void unsortedListSort(int start, int limit, double factor) throws IOException {
+    // sorts using selection sort
+    private static void unsortedListSort(int start, int limit, double factor) throws IOException {
         FileWriter fw = new FileWriter("unsorted.txt");
         fw.append("Unsorted heap sort\n");
         while (start < limit) {
@@ -51,7 +52,8 @@ public class HeapSort {
         fw.close();
     }
 
-    public static void fasterHeapSort(int start, int limit, double factor) throws IOException {
+    // faster implementation of heapSort
+    private static void fasterHeapSort(int start, int limit, double factor) throws IOException {
         FileWriter fw = new FileWriter("fasterHeapSort.txt");
         fw.append("Faster Heap Sort\n");
         while (start < limit) {
@@ -78,7 +80,8 @@ public class HeapSort {
         fw.close();
     }
 
-    public static void naiveHeapSort(int start, int limit, double factor) throws IOException {
+    // naive implementation of heapSort, insert elements one by one
+    private static void naiveHeapSort(int start, int limit, double factor) throws IOException {
         FileWriter fw = new FileWriter("naiveHeapSort.txt");
         fw.append("Naive Heap Sort\n");
         while (start < limit) {
@@ -105,7 +108,8 @@ public class HeapSort {
         fw.close();
     }
 
-    public static int removeMin(List<Integer> list) {
+    // removes the minimum element from a given list
+    private static int removeMin(List<Integer> list) {
         if (list == null || list.size() == 0) {
             throw new IllegalArgumentException("List cannot be null or empty");
         }
@@ -123,8 +127,8 @@ public class HeapSort {
         return minValue;
     }
 
-
-    public static boolean isSorted(List<Integer> list) {
+    // checks if a given list is sorted
+    private static boolean isSorted(List<Integer> list) {
         Integer prev = null;
         for (Integer elem : list) {
             if (prev != null && prev.compareTo(elem) > 0) {

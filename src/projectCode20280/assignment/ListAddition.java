@@ -3,6 +3,9 @@ package projectCode20280.assignment;
 import projectCode20280.DoublyLinkedList;
 import projectCode20280.List;
 
+/**
+ * Q2 for assignment one, linked list addition
+ */
 public class ListAddition {
     public static void main(String[] args) {
         List<Integer> list1 = new DoublyLinkedList<>();
@@ -17,7 +20,7 @@ public class ListAddition {
         System.out.println(add(list1, list2));
     }
 
-    public static List<Integer> add(List<Integer> l1, List<Integer> l2) {
+    private static List<Integer> add(List<Integer> l1, List<Integer> l2) {
         List<Integer> list1 = new DoublyLinkedList<>();
         List<Integer> list2 = new DoublyLinkedList<>();
         for (int i : l1) {
