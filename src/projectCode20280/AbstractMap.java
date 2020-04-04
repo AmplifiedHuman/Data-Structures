@@ -23,8 +23,6 @@ public abstract class AbstractMap<K, V> implements Map<K, V> {
         return size() == 0;
     }
 
-    // ---------------- nested MapEntry class ----------------
-
     /**
      * Returns an iterable collection of the keys contained in the map.
      *
@@ -63,12 +61,10 @@ public abstract class AbstractMap<K, V> implements Map<K, V> {
             v = value;
         }
 
-        // public methods of the Entry interface
         public K getKey() {
             return k;
         }
 
-        // utilities not exposed as part of the Entry interface
         protected void setKey(K key) {
             k = key;
         }
@@ -83,16 +79,14 @@ public abstract class AbstractMap<K, V> implements Map<K, V> {
             return old;
         }
 
-        /**
-         * Returns string representation (for debugging only)
-         */
         public String toString() {
             return "<" + k + ", " + v + ">";
         }
+    }
 
-    } // ----------- end of nested MapEntry class -----------
-
-    // ---------------- nested KeyIterator class ----------------
+    /**
+     * Iterator for the keys
+     */
     private class KeyIterator implements Iterator<K> {
         private Iterator<Entry<K, V>> entries = entrySet().iterator(); // reuse entrySet
 
@@ -102,23 +96,27 @@ public abstract class AbstractMap<K, V> implements Map<K, V> {
 
         public K next() {
             return entries.next().getKey();
-        } // return key!
+        }
 
         public void remove() {
             throw new UnsupportedOperationException("remove not supported");
         }
-    } // ----------- end of nested KeyIterator class -----------
+    }
 
-    // ---------------- nested KeyIterable class ----------------
+    /**
+     * Iterable class, returns an iterator (for easy iteration)
+     */
     private class KeyIterable implements Iterable<K> {
         public Iterator<K> iterator() {
             return new KeyIterator();
         }
-    } // ----------- end of nested KeyIterable class -----------
+    }
 
-    // ---------------- nested ValueIterator class ----------------
+    /**
+     * Iterator for the values
+     */
     private class ValueIterator implements Iterator<V> {
-        private Iterator<Entry<K, V>> entries = entrySet().iterator(); // reuse entrySet
+        private Iterator<Entry<K, V>> entries = entrySet().iterator();
 
         public boolean hasNext() {
             return entries.hasNext();
@@ -126,17 +124,16 @@ public abstract class AbstractMap<K, V> implements Map<K, V> {
 
         public V next() {
             return entries.next().getValue();
-        } // return value!
+        }
 
         public void remove() {
             throw new UnsupportedOperationException("remove not supported");
         }
-    } // ----------- end of nested ValueIterator class -----------
+    }
 
-    // ---------------- nested ValueIterable class ----------------
     private class ValueIterable implements Iterable<V> {
         public Iterator<V> iterator() {
             return new ValueIterator();
         }
-    } // ----------- end of nested ValueIterable class -----------
+    }
 }
