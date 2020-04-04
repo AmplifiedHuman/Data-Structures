@@ -146,11 +146,11 @@ public class LinkedBinaryTree<E extends Comparable<E>> extends AbstractBinaryTre
             return createNode(e, null, null, null);
         }
         if (e.compareTo(p.getElement()) > 0) {
-            p.right = addRecursive(p.right, e);
-            p.right.parent = p;
+            p.setRight(addRecursive(p.getRight(), e));
+            p.getRight().setParent(p);
         } else if (e.compareTo(p.getElement()) < 0) {
-            p.left = addRecursive(p.left, e);
-            p.left.parent = p;
+            p.setLeft(addRecursive(p.getLeft(), e));
+            p.getLeft().setParent(p);
         }
         return p;
     }
@@ -169,9 +169,9 @@ public class LinkedBinaryTree<E extends Comparable<E>> extends AbstractBinaryTre
         if (left(node) != null) {
             throw new IllegalArgumentException("p already has a left child");
         }
-        node.left = createNode(e, node, null, null);
+        node.setLeft(createNode(e, node, null, null));
         size++;
-        return node.left;
+        return node.getLeft();
     }
 
     /**
@@ -188,9 +188,9 @@ public class LinkedBinaryTree<E extends Comparable<E>> extends AbstractBinaryTre
         if (right(node) != null) {
             throw new IllegalArgumentException("p already has a left child");
         }
-        node.right = createNode(e, node, null, null);
+        node.setRight(createNode(e, node, null, null));
         size++;
-        return node.right;
+        return node.getRight();
     }
 
     /**
@@ -204,7 +204,7 @@ public class LinkedBinaryTree<E extends Comparable<E>> extends AbstractBinaryTre
     public E set(Position<E> p, E e) throws IllegalArgumentException {
         Node<E> n = validate(p);
         E temp = n.getElement();
-        n.element = e;
+        n.setElement(e);
         return temp;
     }
 
@@ -227,10 +227,10 @@ public class LinkedBinaryTree<E extends Comparable<E>> extends AbstractBinaryTre
         if (isInternal(n)) {
             throw new IllegalArgumentException("p is not a leaf.");
         }
-        n.left = t1.root;
-        t1.root.parent = n;
-        n.right = t2.root;
-        t2.root.parent = n;
+        n.setLeft(t1.root);
+        t1.root.setParent(n);
+        n.setRight(t2.root);
+        t2.root.setParent(n);
         size += t1.size() + t2.size();
         t1.clear();
         t2.clear();
@@ -277,31 +277,31 @@ public class LinkedBinaryTree<E extends Comparable<E>> extends AbstractBinaryTre
             if (isRoot(n)) {
                 root = null;
             } else if (parentNode.getLeft() == n) {
-                parentNode.left = null;
+                parentNode.setLeft(null);
             } else {
-                parentNode.right = null;
+                parentNode.setRight(null);
             }
             // When the position has one children
         } else if (nChildren == 1) {
             if (isRoot(n)) {
                 root = (n.getLeft() == null) ? n.getRight() : n.getLeft();
-                root.parent = null;
+                root.setParent(null);
             } else if (parentNode.getLeft() == n) {
-                parentNode.left = (n.getLeft() == null) ? n.getRight() : n.getLeft();
-                parentNode.left.parent = parentNode;
+                parentNode.setLeft((n.getLeft() == null) ? n.getRight() : n.getLeft());
+                parentNode.getLeft().setParent(parentNode);
             } else {
-                parentNode.right = (n.getLeft() == null) ? n.getRight() : n.getLeft();
-                parentNode.right.parent = parentNode;
+                parentNode.setRight((n.getLeft() == null) ? n.getRight() : n.getLeft());
+                parentNode.getRight().setParent(parentNode);
             }
             // When the position has two children
         } else {
             // Need to find substitute node
             Node<E> leftNode = n.getLeft();
             while (leftNode.getRight() != null) {
-                leftNode = leftNode.right;
+                leftNode = leftNode.getRight();
             }
             // Copy substitute node to n and delete substitute node
-            n.element = removeRecursive(leftNode);
+            n.setElement(removeRecursive(leftNode));
         }
         return removed;
     }
@@ -384,6 +384,22 @@ public class LinkedBinaryTree<E extends Comparable<E>> extends AbstractBinaryTre
 
         public Node<E> getRight() {
             return right;
+        }
+
+        public void setParent(Node<E> parent) {
+            this.parent = parent;
+        }
+
+        public void setElement(E element) {
+            this.element = element;
+        }
+
+        public void setLeft(Node<E> left) {
+            this.left = left;
+        }
+
+        public void setRight(Node<E> right) {
+            this.right = right;
         }
     }
 }
