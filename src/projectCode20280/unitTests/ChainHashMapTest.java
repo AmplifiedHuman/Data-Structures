@@ -3,20 +3,20 @@ package projectCode20280.unitTests;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import projectCode20280.ChainHashMap;
 import projectCode20280.Entry;
-import projectCode20280.UnsortedTableMap;
 
 import java.util.HashMap;
 
 
-public class UnsortedTableMapTest {
-    private UnsortedTableMap<Integer, Integer> map;
+public class ChainHashMapTest {
+    private ChainHashMap<Integer, Integer> map;
     // HashMap for testing
     private HashMap<Integer, Integer> testMap;
 
     @BeforeEach
     void init() {
-        map = new UnsortedTableMap<>();
+        map = new ChainHashMap<>();
         testMap = new HashMap<>();
     }
 

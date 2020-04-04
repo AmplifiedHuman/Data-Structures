@@ -22,6 +22,7 @@ public abstract class AbstractHashMap<K, V> extends AbstractMap<K, V> {
     protected int capacity;              // length of the table
     private int prime;                   // prime factor
     private long scale, shift;           // the shift and scaling factors
+    private int a, b;                    // MAD constants a, b
 
     /**
      * Creates a hash table with the given capacity and prime factor.
@@ -32,6 +33,8 @@ public abstract class AbstractHashMap<K, V> extends AbstractMap<K, V> {
         Random rand = new Random();
         scale = rand.nextInt(prime - 1) + 1;
         shift = rand.nextInt(prime);
+        a = rand.nextInt(prime);
+        b = rand.nextInt(prime);
         createTable();
     }
 
@@ -108,15 +111,29 @@ public abstract class AbstractHashMap<K, V> extends AbstractMap<K, V> {
      * Hash function applying MAD method to default hash code.
      */
     private int hashValue(K key) {
-        // TODO
-    	return 0;
+        // Math.abs prevents negative results from overflow
+        return Math.abs(a * key.hashCode() + b % prime) % capacity;
     }
 
     /**
      * Updates the size of the hash table and rehashes all entries.
      */
     private void resize(int newCap) {
-    	// TODO
+        // temp list for storing the entries
+        ArrayList<Entry<K, V>> tempList = new ArrayList<>(capacity);
+        for (Entry<K, V> e : entrySet()) {
+            tempList.add(e);
+        }
+        // set new capacity
+        capacity = newCap;
+        // create new table
+        createTable();
+        // set size to 0
+        n = 0;
+        // add the elements to the new list
+        for (Entry<K, V> e : tempList) {
+            put(e.getKey(), e.getValue());
+        }
     }
 
     // protected abstract methods to be implemented by subclasses
