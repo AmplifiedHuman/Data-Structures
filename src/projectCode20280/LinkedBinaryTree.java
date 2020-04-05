@@ -300,7 +300,7 @@ public class LinkedBinaryTree<E extends Comparable<E>> extends AbstractBinaryTre
             while (leftNode.getRight() != null) {
                 leftNode = leftNode.getRight();
             }
-            // Copy substitute node to n and delete substitute node
+            // copy substitute node to n and delete substitute node
             n.setElement(removeRecursive(leftNode));
         }
         return removed;
@@ -374,28 +374,28 @@ public class LinkedBinaryTree<E extends Comparable<E>> extends AbstractBinaryTre
             return element;
         }
 
+        public void setElement(E element) {
+            this.element = element;
+        }
+
         public Node<E> getParent() {
             return parent;
-        }
-
-        public Node<E> getLeft() {
-            return left;
-        }
-
-        public Node<E> getRight() {
-            return right;
         }
 
         public void setParent(Node<E> parent) {
             this.parent = parent;
         }
 
-        public void setElement(E element) {
-            this.element = element;
+        public Node<E> getLeft() {
+            return left;
         }
 
         public void setLeft(Node<E> left) {
             this.left = left;
+        }
+
+        public Node<E> getRight() {
+            return right;
         }
 
         public void setRight(Node<E> right) {
