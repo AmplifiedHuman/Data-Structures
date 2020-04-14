@@ -3,6 +3,13 @@ package projectCode20280;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
+/**
+ * A Concrete implementation of the Stack Interface which accepts an arbitrary type.
+ * The core data structure used is an array, with a limited capacity basic operations operate in O(1) constant time.
+ *
+ * @param <E> Arbitrary type
+ */
+
 public class BoundedStack<E> implements Stack<E> {
     private int size;
     private E[] items;
@@ -20,15 +27,21 @@ public class BoundedStack<E> implements Stack<E> {
     }
 
     public static void main(String[] args) {
-        BoundedStack<Integer> as = new BoundedStack<>(100);
+        BoundedStack<Integer> bs = new BoundedStack<>(100);
+        // Inserts integers 0-9 into the stack.
         for (int i = 0; i < 10; i++) {
-            as.push(i);
+            bs.push(i);
         }
+        System.out.println("Stack: " + bs.toString());
+        // Remove all entries, prints removed elements separated by spaces
+        System.out.print("Removed: ");
         for (int i = 0; i < 10; i++) {
-            System.out.print(as.top() + " ");
-            as.pop();
+            System.out.print(bs.top() + " ");
+            bs.pop();
         }
         System.out.println();
+        // Prints final stack
+        System.out.println("Final stack: " + bs.toString());
     }
 
     /**

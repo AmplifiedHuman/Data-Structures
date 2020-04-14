@@ -49,16 +49,17 @@ public class HeapPriorityQueue<K extends Comparable<K>, V> extends AbstractPrior
         Integer[] values = {2, 5, 16, 4, 10, 23, 39, 18, 26, 15};
         HeapPriorityQueue<Integer, Integer> heap = new HeapPriorityQueue<>(keys, values);
         heap.sanityCheck();
-        System.out.println(heap);
-        System.out.println("Removing 2 min..");
+        System.out.println("Heap: " + heap);
+        System.out.println("Current min: " + heap.min());
         heap.removeMin();
         heap.removeMin();
         heap.sanityCheck();
-        System.out.println(heap);
-        System.out.println("Adding min..");
+        System.out.println("Removed 2 min: " + heap);
+        System.out.println("Current min: " + heap.min());
         heap.insert(-1, -1);
         heap.sanityCheck();
-        System.out.println(heap);
+        System.out.println("Added new min (-1, -1): " + heap);
+        System.out.println("Current min: " + heap.min());
     }
 
     /**

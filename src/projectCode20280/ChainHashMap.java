@@ -42,7 +42,9 @@ public class ChainHashMap<K, V> extends AbstractHashMap<K, V> {
         System.out.println("m: " + m);
 
         m.remove(11);
-        System.out.println("m: " + m);
+        System.out.println("Removed 11: " + m);
+
+        System.out.printf("Value of key %d: %s", 10, m.get(10));
     }
 
     /**

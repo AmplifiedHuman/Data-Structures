@@ -2,7 +2,14 @@ package projectCode20280;
 
 import java.util.Iterator;
 
-public class LinkedStack<E> implements Stack<E>, Iterable<E> {
+/**
+ * A Concrete implementation of the Stack Interface which accepts an arbitrary type.
+ * The core data structure used is just a Singly Linked List, since we only need to use addFirst and get(0)
+ * both operate in constant time O(1)
+ *
+ * @param <E> Arbitrary type
+ */
+public class LinkedStack<E> implements Stack<E> {
     private SinglyLinkedList<E> sllist;
 
     public LinkedStack() {
@@ -11,14 +18,20 @@ public class LinkedStack<E> implements Stack<E>, Iterable<E> {
 
     public static void main(String[] args) {
         LinkedStack<Integer> as = new LinkedStack<>();
+        // Inserts integers 0-9 into the stack.
         for (int i = 0; i < 10; i++) {
             as.push(i);
         }
+        System.out.println("Stack: " + as.toString());
+        // Remove all entries, prints removed elements separated by spaces
+        System.out.print("Removed: ");
         for (int i = 0; i < 10; i++) {
             System.out.print(as.top() + " ");
             as.pop();
         }
         System.out.println();
+        // Prints final stack
+        System.out.println("Final stack: " + as.toString());
     }
 
     /**

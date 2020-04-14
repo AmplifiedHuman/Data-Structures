@@ -2,6 +2,13 @@ package projectCode20280;
 
 import java.util.Iterator;
 
+/**
+ * A Concrete implementation of the Deque Interface which accepts an arbitrary type.
+ * The core data structure used is a Doubly Linked List, since we need get(0), removeLast(), and removeFirst()
+ * and addFirst() to all operate in constant time O(1).
+ *
+ * @param <E> Arbitrary type
+ */
 public class LinkedDeque<E> implements Deque<E> {
     private DoublyLinkedList<E> dllist;
 
@@ -11,23 +18,32 @@ public class LinkedDeque<E> implements Deque<E> {
 
     public static void main(String[] args) {
         LinkedDeque<Integer> ld = new LinkedDeque<>();
+        // Inserts integers 0-9 into the deque using addFirst.
         for (int i = 0; i < 10; i++) {
             ld.addFirst(i);
         }
+        System.out.println("Deque: " + ld.toString());
+        // Remove all entries, prints removed elements separated by spaces, using removeFirst
+        System.out.print("Removed: ");
         for (int i = 0; i < 10; i++) {
             System.out.print(ld.first() + " ");
             ld.removeFirst();
         }
         System.out.println();
-
+        // Inserts integers 0-9 into the deque using addLast.
         for (int i = 0; i < 10; i++) {
             ld.addLast(i);
         }
+        System.out.println("Deque: " + ld.toString());
+        // Remove all entries, prints removed elements separated by spaces, using removeLast
+        System.out.print("Removed: ");
         for (int i = 0; i < 10; i++) {
             System.out.print(ld.first() + " ");
             ld.removeFirst();
         }
         System.out.println();
+        // Prints final deque
+        System.out.println("Final deque: " + ld.toString());
     }
 
     /**

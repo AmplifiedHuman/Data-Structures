@@ -3,6 +3,13 @@ package projectCode20280;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
+/**
+ * A Concrete implementation of the Queue Interface which accepts an arbitrary type.
+ * The core data structure used is an array, with a limited capacity basic operations operate in O(1) constant time.
+ *
+ * @param <E> Arbitrary type
+ */
+
 public class ArrayQueue<E> implements Queue<E> {
     public static final int DEFAULT_CAPACITY = 10;
     private int size;
@@ -28,23 +35,20 @@ public class ArrayQueue<E> implements Queue<E> {
     }
 
     public static void main(String[] args) {
-        ArrayQueue<Integer> lq = new ArrayQueue<>();
+        ArrayQueue<Integer> aq = new ArrayQueue<>();
+        // Inserts integers 0-9 into the queue.
         for (int i = 0; i < 10; i++) {
-            lq.enqueue(i);
+            aq.enqueue(i);
         }
+        System.out.println("Queue: " + aq.toString());
+        // Remove all entries, prints removed elements separated by spaces
+        System.out.print("Removed: ");
         for (int i = 0; i < 10; i++) {
-            System.out.print(lq.dequeue() + " ");
-        }
-
-        for (int i = 0; i < 10; i++) {
-            lq.enqueue(i);
-        }
-        System.out.println();
-
-        for (int i = 0; i < 10; i++) {
-            System.out.print(lq.dequeue() + " ");
+            System.out.print(aq.dequeue() + " ");
         }
         System.out.println();
+        // Prints final queue
+        System.out.println("Final queue: " + aq.toString());
     }
 
     /**

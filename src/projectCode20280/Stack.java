@@ -1,5 +1,8 @@
 package projectCode20280;
-
+/**
+ * An interface for a Stack (LIFO), with constraint basic operations of a List.
+ * It extends the iterable class, so that the elements in the Stack can be iterated easily.
+ */
 public interface Stack<E> extends Iterable<E> {
 
     /**

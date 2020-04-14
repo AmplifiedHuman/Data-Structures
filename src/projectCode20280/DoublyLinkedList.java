@@ -3,6 +3,13 @@ package projectCode20280;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
+/**
+ * A Concrete implementation of the List Interface which accepts an arbitrary type.
+ * Note: removeFirst, removeLast, get(0), and getLast are all fast O(1) since there's an additional link in the nodes,
+ * which allows backwards traversal
+ *
+ * @param <E> Arbitrary type
+ */
 public class DoublyLinkedList<E> implements List<E> {
     private int size;
     private Node<E> head;
@@ -19,22 +26,31 @@ public class DoublyLinkedList<E> implements List<E> {
     }
 
     public static void main(String[] args) {
-        DoublyLinkedList<Integer> ll = new DoublyLinkedList<>();
-        ll.addFirst(0);
-        ll.addFirst(1);
-        ll.addFirst(2);
-        ll.addLast(-1);
-        System.out.println(ll);
+        // Simple logical test
+        String[] alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
 
-        ll.removeFirst();
-        System.out.println(ll);
-
-        ll.removeLast();
-        System.out.println(ll);
-
-        for (Integer e : ll) {
-            System.out.println("value: " + e);
+        DoublyLinkedList<String> dll = new DoublyLinkedList<>();
+        // add all elements, uses addFirst and addLast to create a palindrome string
+        for (String s : alphabet) {
+            dll.addFirst(s);
+            dll.addLast(s);
         }
+        System.out.println("Original List: " + dll.toString());
+
+        dll.removeFirst();
+        System.out.println("Removed first element: " + dll.toString());
+
+        dll.removeLast();
+        System.out.println("Removed last element: " + dll.toString());
+
+        dll.remove(2);
+        System.out.println("Removed 3rd element: " + dll.toString());
+
+        System.out.println("Enhanced for loop iteration: ");
+        for (String s : dll) {
+            System.out.print(s + ", ");
+        }
+        System.out.println();
     }
 
     /**

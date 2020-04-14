@@ -6,6 +6,7 @@ import java.util.NoSuchElementException;
 
 /**
  * An implementation of a map using an unsorted table.
+ * It extends the AbstractMap Interface and uses an Java ArrayList (with auto-resizing as it core data structure)
  */
 
 public class UnsortedTableMap<K, V> extends AbstractMap<K, V> {
@@ -29,7 +30,7 @@ public class UnsortedTableMap<K, V> extends AbstractMap<K, V> {
             map.put(i, String.valueOf((char) (i + 'a')));
         }
         // Prints result
-        System.out.println(map);
+        System.out.println("Map: " + map);
     }
 
     // private utility
@@ -39,6 +40,7 @@ public class UnsortedTableMap<K, V> extends AbstractMap<K, V> {
      */
     private int findIndex(K key) {
         int i = 0;
+        // loop through key set, break once found
         for (K entry : keySet()) {
             if (entry.equals(key)) {
                 return i;

@@ -3,6 +3,12 @@ package projectCode20280;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
+/**
+ * A Concrete implementation of the List Interface which accepts an arbitrary type.
+ * Note: getLast, removeLast are slow, O(n) since they require traversal to the end of the list
+ *
+ * @param <E> Arbitrary type
+ */
 public class SinglyLinkedList<E> implements List<E> {
     private int size;
     private Node<E> head;
@@ -16,37 +22,46 @@ public class SinglyLinkedList<E> implements List<E> {
     }
 
     public static void main(String[] args) {
+        // Simple logical test
         String[] alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
 
         SinglyLinkedList<String> sll = new SinglyLinkedList<>();
+        // add all elements, uses addFirst and addLast to create a palindrome string
         for (String s : alphabet) {
             sll.addFirst(s);
             sll.addLast(s);
         }
-        System.out.println(sll.toString());
+        System.out.println("Original List: " + sll.toString());
 
         sll.removeFirst();
-        System.out.println(sll.toString());
+        System.out.println("Removed first element: " + sll.toString());
 
         sll.removeLast();
-        System.out.println(sll.toString());
+        System.out.println("Removed last element: " + sll.toString());
 
         sll.remove(2);
-        System.out.println(sll.toString());
+        System.out.println("Removed 3rd element: " + sll.toString());
 
+        System.out.println("Enhanced for loop iteration: ");
         for (String s : sll) {
             System.out.print(s + ", ");
         }
         System.out.println();
-        sll.reverseUsingStack();
-        System.out.println(sll);
-        sll.reverse();
-        System.out.println(sll);
 
+        // In place reversal of linked list using two stacks (Exercise)
+        sll.reverseUsingStack();
+        System.out.println("Reversed: " + sll.toString());
+
+        // In place reversal of linked list using recursion
+        sll.reverse();
+        System.out.println("Reversed: " + sll.toString());
+
+        // recursively copy the contents of the old list to a new list
         SinglyLinkedList<String> newCopy = sll.recursiveCopy();
+        // remove first element
         newCopy.removeFirst();
         System.out.println("newCopy: " + newCopy);
-        System.out.println("sll: " + sll);
+        System.out.println("Original list after removal: " + sll);
     }
 
     /**

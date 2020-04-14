@@ -2,6 +2,13 @@ package projectCode20280;
 
 import java.util.Iterator;
 
+/**
+ * A Concrete implementation of the Queue Interface which accepts an arbitrary type.
+ * The core data structure used is a Doubly Linked List, since we need get(0), removeLast(), and removeFirst()
+ * all operate in constant time O(1).
+ *
+ * @param <E> Arbitrary type
+ */
 public class LinkedQueue<E> implements Queue<E> {
     /* Alternatively we can use a Singly Linked List if in our implementation
      * there is a tail pointer (getLast and addLast is fast)
@@ -14,13 +21,19 @@ public class LinkedQueue<E> implements Queue<E> {
 
     public static void main(String[] args) {
         LinkedQueue<Integer> lq = new LinkedQueue<>();
+        // Inserts integers 0-9 into the queue.
         for (int i = 0; i < 10; i++) {
             lq.enqueue(i);
         }
+        System.out.println("Queue: " + lq.toString());
+        // Remove all entries, prints removed elements separated by spaces
+        System.out.print("Removed: ");
         for (int i = 0; i < 10; i++) {
             System.out.print(lq.dequeue() + " ");
         }
         System.out.println();
+        // Prints final queue
+        System.out.println("Final queue: " + lq.toString());
     }
 
     /**

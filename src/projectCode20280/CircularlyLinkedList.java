@@ -3,6 +3,13 @@ package projectCode20280;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
+/**
+ * A Concrete implementation of the List Interface which accepts an arbitrary type.
+ * Supports an additional operation rotate() which allows the head of the list to be the next pointed item
+ *
+ * @param <E> Arbitrary type
+ */
+
 public class CircularlyLinkedList<E> implements List<E> {
     // Store the tail reference instead of the head reference so that
     // removeFirst, addFirst, addLast can be fast
@@ -18,31 +25,37 @@ public class CircularlyLinkedList<E> implements List<E> {
     }
 
     public static void main(String[] args) {
-        CircularlyLinkedList<Integer> ll = new CircularlyLinkedList<>();
-        for (int i = 10; i < 20; ++i) {
-            ll.addLast(i);
+        CircularlyLinkedList<Integer> cll = new CircularlyLinkedList<>();
+        // Inserts integers 0-9 into the list using addFirst and addLast to create a palindrome string
+        for (int i = 0; i < 10; i++) {
+            cll.addLast(i);
+            cll.addFirst(i);
         }
+        System.out.println("Original List: " + cll.toString());
 
-        System.out.println(ll);
+        cll.removeFirst();
+        System.out.println("Removed first element: " + cll.toString());
 
-        ll.removeFirst();
-        System.out.println(ll);
+        cll.removeLast();
+        System.out.println("Removed last element: " + cll.toString());
 
-        ll.removeLast();
+        cll.remove(2);
+        System.out.println("Removed 3rd element: " + cll.toString());
 
-        ll.rotate();
-        System.out.println(ll);
-
-        ll.removeFirst();
-        ll.rotate();
-        System.out.println(ll);
-
-        ll.removeLast();
-        ll.rotate();
-        System.out.println(ll);
-
-        for (Integer e : ll) {
-            System.out.println("value: " + e);
+        System.out.println("Enhanced for loop iteration: ");
+        for (int s : cll) {
+            System.out.print(s + ", ");
+        }
+        System.out.println();
+        // Test rotation with 3 elements 0 - 2
+        cll = new CircularlyLinkedList<>();
+        for (int i = 0; i < 3; i++) {
+            cll.addLast(i);
+        }
+        System.out.println("Original List: " + cll.toString());
+        for (int i = 0; i < 3; i++) {
+            cll.rotate();
+            System.out.printf("%d rotation: %s\n", i + 1, cll.toString());
         }
     }
 
