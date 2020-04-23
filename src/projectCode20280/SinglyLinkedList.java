@@ -261,6 +261,30 @@ public class SinglyLinkedList<E> implements List<E> {
     }
 
     /**
+     * Returns the first entry of the list
+     *
+     * @return the first element of the SLList, null if list is empty
+     */
+    public E first() {
+        if (size < 1) {
+            return null;
+        }
+        return get(0);
+    }
+
+    /**
+     * Returns the last entry of the list
+     *
+     * @return the last element of the SLList, null if list is empty
+     */
+    public E last() {
+        if (size < 1) {
+            return null;
+        }
+        return get(size - 1);
+    }
+
+    /**
      * Reverse the order of the SLList using an ArrayStack (can also be done using
      * recursion/iteration)
      *
@@ -348,7 +372,7 @@ public class SinglyLinkedList<E> implements List<E> {
      * Node class
      */
     private static class Node<E> {
-        private E data;
+        private final E data;
         private Node<E> next;
 
         public Node(E data, Node<E> next) {

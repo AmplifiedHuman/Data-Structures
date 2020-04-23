@@ -5,7 +5,7 @@ import java.util.NoSuchElementException;
 /**
  * Concrete implementation of a binary tree using a node-based, linked structure.
  */
-public class LinkedBinaryTree<E extends Comparable<E>> extends AbstractBinaryTree<E> {
+public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
     // root of the tree
     protected Node<E> root;
     // number of nodes in the tree
@@ -108,6 +108,10 @@ public class LinkedBinaryTree<E extends Comparable<E>> extends AbstractBinaryTre
         return node.getLeft();
     }
 
+    public void createLevelOrder(Integer[] array) {
+
+    }
+
     /**
      * Returns the Position of p's right child (or null if no child exists).
      *
@@ -141,18 +145,19 @@ public class LinkedBinaryTree<E extends Comparable<E>> extends AbstractBinaryTre
 
     // Recursively add Nodes to binary tree in proper position
     private Node<E> addRecursive(Node<E> p, E e) {
-        if (p == null) {
-            size++;
-            return createNode(e, null, null, null);
-        }
-        if (e.compareTo(p.getElement()) > 0) {
-            p.setRight(addRecursive(p.getRight(), e));
-            p.getRight().setParent(p);
-        } else if (e.compareTo(p.getElement()) < 0) {
-            p.setLeft(addRecursive(p.getLeft(), e));
-            p.getLeft().setParent(p);
-        }
-        return p;
+//        if (p == null) {
+//            size++;
+//            return createNode(e, null, null, null);
+//        }
+//        if (e.compareTo(p.getElement()) > 0) {
+//            p.setRight(addRecursive(p.getRight(), e));
+//            p.getRight().setParent(p);
+//        } else if (e.compareTo(p.getElement()) < 0) {
+//            p.setLeft(addRecursive(p.getLeft(), e));
+//            p.getLeft().setParent(p);
+//        }
+//        return p;
+        return null;
     }
 
     /**
@@ -252,17 +257,18 @@ public class LinkedBinaryTree<E extends Comparable<E>> extends AbstractBinaryTre
     }
 
     private Position<E> findElement(Node<E> root, E target) {
-        if (root == null) {
-            return null;
-        }
-        if (root.getElement().compareTo(target) == 0) {
-            return root;
-        }
-        if (root.getElement().compareTo(target) < 0) {
-            return findElement(root.getRight(), target);
-        } else {
-            return findElement(root.getLeft(), target);
-        }
+//        if (root == null) {
+//            return null;
+//        }
+//        if (root.getElement().compareTo(target) == 0) {
+//            return root;
+//        }
+//        if (root.getElement().compareTo(target) < 0) {
+//            return findElement(root.getRight(), target);
+//        } else {
+//            return findElement(root.getLeft(), target);
+//        }
+        return null;
     }
 
     // removes the given node using Hibbard Deletion

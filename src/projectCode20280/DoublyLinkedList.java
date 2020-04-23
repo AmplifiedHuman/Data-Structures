@@ -12,8 +12,8 @@ import java.util.NoSuchElementException;
  */
 public class DoublyLinkedList<E> implements List<E> {
     private int size;
-    private Node<E> head;
-    private Node<E> tail;
+    private final Node<E> head;
+    private final Node<E> tail;
 
     /**
      * Creates an empty list
@@ -274,10 +274,36 @@ public class DoublyLinkedList<E> implements List<E> {
     }
 
     /**
+     * Returns the first entry of the list
+     *
+     * @return the first element of the SLList
+     * @throws IndexOutOfBoundsException if size is smaller than 1
+     */
+    public E first() {
+        if (size < 1) {
+            return null;
+        }
+        return head.next.data;
+    }
+
+    /**
+     * Returns the last entry of the list
+     *
+     * @return the last element of the SLList
+     * @throws IndexOutOfBoundsException if size is smaller than 1
+     */
+    public E last() {
+        if (size < 1) {
+            return null;
+        }
+        return tail.prev.data;
+    }
+
+    /**
      * Node class
      */
     private static class Node<E> {
-        private E data;
+        private final E data;
         private Node<E> next;
         private Node<E> prev;
 
