@@ -1,4 +1,5 @@
 package projectCode20280;
+
 /**
  * An interface for a Deque, which supports operation on the end and the front of the deque in constant time O(1)
  * It extends the iterable class, so that the elements in the Deque can be iterated easily.

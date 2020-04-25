@@ -20,9 +20,11 @@ import java.util.Random;
 public abstract class AbstractHashMap<K, V> extends AbstractMap<K, V> {
     protected int n = 0;                 // number of entries in the dictionary
     protected int capacity;              // length of the table
-    private int prime;                   // prime factor
-    private long scale, shift;           // the shift and scaling factors
-    private int a, b;                    // MAD constants a, b
+    private final int prime;                   // prime factor
+    private final long scale;
+    private final long shift;           // the shift and scaling factors
+    private final int a;
+    private final int b;                    // MAD constants a, b
 
     /**
      * Creates a hash table with the given capacity and prime factor.

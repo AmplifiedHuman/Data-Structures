@@ -13,7 +13,7 @@ public class UnsortedTableMap<K, V> extends AbstractMap<K, V> {
     /**
      * Underlying storage for the map of entries.
      */
-    private ArrayList<MapEntry<K, V>> table;
+    private final ArrayList<MapEntry<K, V>> table;
 
     public UnsortedTableMap() {
         table = new ArrayList<>();

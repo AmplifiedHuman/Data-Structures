@@ -13,7 +13,7 @@ public class LinkedQueue<E> implements Queue<E> {
     /* Alternatively we can use a Singly Linked List if in our implementation
      * there is a tail pointer (getLast and addLast is fast)
      */
-    private DoublyLinkedList<E> dllist;
+    private final DoublyLinkedList<E> dllist;
 
     public LinkedQueue() {
         dllist = new DoublyLinkedList<>();

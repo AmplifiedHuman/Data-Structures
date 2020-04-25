@@ -1,11 +1,11 @@
 package projectCode20280;
 
-import java.util.NoSuchElementException;
-
 /**
  * Concrete implementation of a binary tree using a node-based, linked structure.
  */
 public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
+    // comparator
+    private final DefaultComparator<E> comparator;
     // root of the tree
     protected Node<E> root;
     // number of nodes in the tree
@@ -14,6 +14,7 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
     public LinkedBinaryTree() {
         root = null;
         size = 0;
+        comparator = new DefaultComparator<>();
     }
 
     public static void main(String[] args) {
@@ -145,19 +146,18 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
 
     // Recursively add Nodes to binary tree in proper position
     private Node<E> addRecursive(Node<E> p, E e) {
-//        if (p == null) {
-//            size++;
-//            return createNode(e, null, null, null);
-//        }
-//        if (e.compareTo(p.getElement()) > 0) {
-//            p.setRight(addRecursive(p.getRight(), e));
-//            p.getRight().setParent(p);
-//        } else if (e.compareTo(p.getElement()) < 0) {
-//            p.setLeft(addRecursive(p.getLeft(), e));
-//            p.getLeft().setParent(p);
-//        }
-//        return p;
-        return null;
+        if (p == null) {
+            size++;
+            return createNode(e, null, null, null);
+        }
+        if (compareTo(e, p.getElement()) > 0) {
+            p.setRight(addRecursive(p.getRight(), e));
+            p.getRight().setParent(p);
+        } else if (compareTo(e, p.getElement()) < 0) {
+            p.setLeft(addRecursive(p.getLeft(), e));
+            p.getLeft().setParent(p);
+        }
+        return p;
     }
 
     /**
@@ -208,7 +208,7 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
      */
     public E set(Position<E> p, E e) throws IllegalArgumentException {
         Node<E> n = validate(p);
-        E temp = n.getElement();
+        E temp = p.getElement();
         n.setElement(e);
         return temp;
     }
@@ -242,77 +242,6 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
     }
 
     /**
-     * Removes the given item from the tree
-     *
-     * @param val to be removed
-     * @return the removed value
-     * @throws IllegalArgumentException if the item is not in the tree
-     */
-    public E remove(E val) {
-        Position<E> element = findElement(root, val);
-        if (element == null) {
-            throw new NoSuchElementException("Element not in tree");
-        }
-        return remove(element);
-    }
-
-    private Position<E> findElement(Node<E> root, E target) {
-//        if (root == null) {
-//            return null;
-//        }
-//        if (root.getElement().compareTo(target) == 0) {
-//            return root;
-//        }
-//        if (root.getElement().compareTo(target) < 0) {
-//            return findElement(root.getRight(), target);
-//        } else {
-//            return findElement(root.getLeft(), target);
-//        }
-        return null;
-    }
-
-    // removes the given node using Hibbard Deletion
-    private E removeRecursive(Node<E> n) {
-        E removed = n.getElement();
-        // Gets the number of children node
-        int nChildren = ((n.getLeft() == null) ? 0 : 1) + ((n.getRight() == null) ? 0 : 1);
-        // Gets the number of parent node
-        Node<E> parentNode = n.getParent();
-        // When the position has no children (a leaf)
-        if (nChildren == 0) {
-            if (isRoot(n)) {
-                root = null;
-            } else if (parentNode.getLeft() == n) {
-                parentNode.setLeft(null);
-            } else {
-                parentNode.setRight(null);
-            }
-            // When the position has one children
-        } else if (nChildren == 1) {
-            if (isRoot(n)) {
-                root = (n.getLeft() == null) ? n.getRight() : n.getLeft();
-                root.setParent(null);
-            } else if (parentNode.getLeft() == n) {
-                parentNode.setLeft((n.getLeft() == null) ? n.getRight() : n.getLeft());
-                parentNode.getLeft().setParent(parentNode);
-            } else {
-                parentNode.setRight((n.getLeft() == null) ? n.getRight() : n.getLeft());
-                parentNode.getRight().setParent(parentNode);
-            }
-            // When the position has two children
-        } else {
-            // Need to find substitute node
-            Node<E> leftNode = n.getLeft();
-            while (leftNode.getRight() != null) {
-                leftNode = leftNode.getRight();
-            }
-            // copy substitute node to n and delete substitute node
-            n.setElement(removeRecursive(leftNode));
-        }
-        return removed;
-    }
-
-    /**
      * Removes the node at Position p, uses Hibbard Deletion to delete a position if it has two
      * children.
      *
@@ -321,12 +250,26 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
      * @throws IllegalArgumentException if p is not a valid Position for this tree.
      */
     public E remove(Position<E> p) throws IllegalArgumentException {
-        Node<E> n = validate(p);
-        if (findElement(n, p.getElement()) == null) {
-            throw new NoSuchElementException("Element not in tree");
+        Node<E> n = (Node<E>) p;
+        if (numChildren(n) == 2) {
+            throw new IllegalArgumentException("Cannot remove node with 2 children");
         }
-        E temp = removeRecursive(n);
+        Node<E> child = n.getLeft() != null ? n.getLeft() : n.getRight();
+        if (child != null) {
+            child.setParent(n.getParent());
+        }
+        if (n == root) {
+            root = child;
+        } else {
+            Node<E> parent = n.getParent();
+            if (n == parent.getLeft()) {
+                parent.setLeft(child);
+            } else {
+                parent.setRight(child);
+            }
+        }
         size--;
+        E temp = n.getElement();
         return temp;
     }
 
@@ -339,8 +282,10 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
         StringBuilder sb = new StringBuilder();
         sb.append("[");
         for (Position<E> p : positions()) {
-            sb.append(p.getElement());
-            sb.append(", ");
+            if (isInternal(p)) {
+                sb.append(p.getElement());
+                sb.append(", ");
+            }
         }
         sb.deleteCharAt(sb.length() - 1);
         sb.deleteCharAt(sb.length() - 1);
@@ -354,6 +299,10 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
     public void clear() {
         root = null;
         size = 0;
+    }
+
+    protected int compareTo(E first, E second) {
+        return comparator.compare(first, second);
     }
 
     /**
@@ -373,10 +322,7 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
         }
 
         @Override
-        public E getElement() throws IllegalStateException {
-            if (element == null) {
-                throw new IllegalStateException();
-            }
+        public E getElement() {
             return element;
         }
 
@@ -406,6 +352,13 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
 
         public void setRight(Node<E> right) {
             this.right = right;
+        }
+
+        @Override
+        public String toString() {
+            StringBuilder sb = new StringBuilder();
+            sb.append(getElement());
+            return sb.toString();
         }
     }
 }

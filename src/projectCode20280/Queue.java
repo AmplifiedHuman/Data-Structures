@@ -1,4 +1,5 @@
 package projectCode20280;
+
 /**
  * An interface for a Stack (LIFO), with constraint basic operations of a List.
  * It extends the iterable class, so that the elements in the Queue can be iterated easily.

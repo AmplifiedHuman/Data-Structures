@@ -88,7 +88,7 @@ public abstract class AbstractMap<K, V> implements Map<K, V> {
      * Iterator for the keys
      */
     private class KeyIterator implements Iterator<K> {
-        private Iterator<Entry<K, V>> entries = entrySet().iterator(); // reuse entrySet
+        private final Iterator<Entry<K, V>> entries = entrySet().iterator(); // reuse entrySet
 
         public boolean hasNext() {
             return entries.hasNext();
@@ -116,7 +116,7 @@ public abstract class AbstractMap<K, V> implements Map<K, V> {
      * Iterator for the values
      */
     private class ValueIterator implements Iterator<V> {
-        private Iterator<Entry<K, V>> entries = entrySet().iterator();
+        private final Iterator<Entry<K, V>> entries = entrySet().iterator();
 
         public boolean hasNext() {
             return entries.hasNext();

@@ -18,7 +18,7 @@ public abstract class AbstractPriorityQueue<K extends Comparable<K>, V>
     /**
      * The comparator defining the ordering of keys in the priority queue.
      */
-    private Comparator<K> comp;
+    private final Comparator<K> comp;
 
     // instance variable for an AbstractPriorityQueue
 

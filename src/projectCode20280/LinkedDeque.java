@@ -10,7 +10,7 @@ import java.util.Iterator;
  * @param <E> Arbitrary type
  */
 public class LinkedDeque<E> implements Deque<E> {
-    private DoublyLinkedList<E> dllist;
+    private final DoublyLinkedList<E> dllist;
 
     public LinkedDeque() {
         dllist = new DoublyLinkedList<>();

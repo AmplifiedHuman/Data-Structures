@@ -13,7 +13,7 @@ import java.util.NoSuchElementException;
 public class ArrayStack<E> implements Stack<E>, Iterable<E> {
     public static final int DEFAULT_CAPACITY = 100;
     private int size;
-    private E[] items;
+    private final E[] items;
     // stores the top of the stack
     private int top;
 

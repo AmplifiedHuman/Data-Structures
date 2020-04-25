@@ -9,7 +9,7 @@ import java.util.Iterator;
  * constant time.
  */
 public class LinkedCircularQueue<E> implements Queue<E> {
-    private CircularlyLinkedList<E> cllist;
+    private final CircularlyLinkedList<E> cllist;
 
     public LinkedCircularQueue() {
         cllist = new CircularlyLinkedList<>();

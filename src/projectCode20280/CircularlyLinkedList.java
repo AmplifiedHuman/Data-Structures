@@ -301,7 +301,7 @@ public class CircularlyLinkedList<E> implements List<E> {
      * Node class
      */
     private static class Node<E> {
-        private E data;
+        private final E data;
         private Node<E> next;
 
         public Node(E data, Node<E> next) {

@@ -10,7 +10,7 @@ import java.util.Iterator;
  * @param <E> Arbitrary type
  */
 public class LinkedStack<E> implements Stack<E> {
-    private SinglyLinkedList<E> sllist;
+    private final SinglyLinkedList<E> sllist;
 
     public LinkedStack() {
         sllist = new SinglyLinkedList<>();

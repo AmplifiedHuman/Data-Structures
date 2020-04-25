@@ -11,9 +11,9 @@ import java.util.NoSuchElementException;
  * @param <E> Arbitrary type
  */
 public class DoublyLinkedList<E> implements List<E> {
-    private int size;
     private final Node<E> head;
     private final Node<E> tail;
+    private int size;
 
     /**
      * Creates an empty list

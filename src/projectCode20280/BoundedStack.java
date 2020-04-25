@@ -12,7 +12,7 @@ import java.util.NoSuchElementException;
 
 public class BoundedStack<E> implements Stack<E> {
     private int size;
-    private E[] items;
+    private final E[] items;
     // stores the top of the stack
     private int top;
 

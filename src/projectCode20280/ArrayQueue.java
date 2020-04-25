@@ -13,7 +13,7 @@ import java.util.NoSuchElementException;
 public class ArrayQueue<E> implements Queue<E> {
     public static final int DEFAULT_CAPACITY = 10;
     private int size;
-    private E[] items;
+    private final E[] items;
     // stores the front of the queue
     private int front;
     // stores the end of the queue
