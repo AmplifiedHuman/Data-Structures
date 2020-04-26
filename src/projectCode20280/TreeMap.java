@@ -128,7 +128,19 @@ public class TreeMap<K, V> extends AbstractSortedMap<K, V> {
 
     @Override
     public String toString() {
-        return tree.toString();
+        StringBuilder sb = new StringBuilder("[");
+        int i = 0;
+        for (Position<Entry<K, V>> position : tree.positions()) {
+            if (isInternal(position)) {
+                sb.append(position);
+                if (i != size() - 1) {
+                    sb.append(", ");
+                }
+                i++;
+            }
+        }
+        sb.append("]");
+        return sb.toString();
     }
 
     /**

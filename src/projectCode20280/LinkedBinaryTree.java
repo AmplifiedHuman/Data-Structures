@@ -20,18 +20,23 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
     public static void main(String[] args) {
         LinkedBinaryTree<Integer> bt = new LinkedBinaryTree<>();
         // elements to be inserted
-        int[] arr = {12, 25, 31, 58, 36, 42, 90, 62, 75, 8, 18};
+        Integer[] arr = {12, 25, 31, 58, 36, 42, 90, 62, 75};
         // construct binary tree of 11 elements
-        for (int i : arr) {
-            bt.insert(i);
-        }
+        bt.createLevelOrder(arr);
+        BinaryTreePrinter printer = new BinaryTreePrinter(bt);
+        System.out.println("Tree:\n" + printer.print());
         System.out.println("bt: " + bt.size() + " " + bt);
+        System.out.println("inorder: " + bt.inorder());
+        System.out.println("preorder: " + bt.preorder());
+        System.out.println("postorder: " + bt.postorder());
         bt.clear();
         // construct binary tree of 3 elements, uses addLeft and addRight
         bt.addRoot(5);
         bt.addLeft(bt.root(), 3);
         bt.addRight(bt.root(), 9);
+        System.out.println("Tree:\n" + printer.print());
         System.out.println("bt: " + bt.size() + " " + bt);
+        System.out.println("inorder: " + bt.inorder());
     }
 
     /**
@@ -109,9 +114,21 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
         return node.getLeft();
     }
 
-    public void createLevelOrder(Integer[] array) {
-
+    public void createLevelOrder(E[] array) {
+        root = createLevelOrderHelper(array, root, 0);
     }
+
+    private Node<E> createLevelOrderHelper(E[] arr, Node<E> parent, int i) {
+        if (i >= arr.length) {
+            return parent;
+        }
+        Node<E> n = createNode(arr[i], parent, null, null);
+        size++;
+        n.setLeft(createLevelOrderHelper(arr, n.left, 2 * i + 1));
+        n.setRight(createLevelOrderHelper(arr, n.right, 2 * i + 2));
+        return n;
+    }
+
 
     /**
      * Returns the Position of p's right child (or null if no child exists).
@@ -134,8 +151,11 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
      * @throws IllegalStateException if the tree is not empty
      */
     public Position<E> addRoot(E e) throws IllegalStateException {
+        if (root != null) {
+            throw new IllegalStateException("Root already exist");
+        }
         root = createNode(e, null, null, null);
-        size++;
+        size = 1;
         return root;
     }
 
@@ -282,10 +302,8 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
         StringBuilder sb = new StringBuilder();
         sb.append("[");
         for (Position<E> p : positions()) {
-            if (isInternal(p)) {
-                sb.append(p.getElement());
-                sb.append(", ");
-            }
+            sb.append(p.getElement());
+            sb.append(", ");
         }
         sb.deleteCharAt(sb.length() - 1);
         sb.deleteCharAt(sb.length() - 1);
