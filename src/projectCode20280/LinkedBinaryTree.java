@@ -120,12 +120,12 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
 
     private Node<E> createLevelOrderHelper(E[] arr, Node<E> parent, int i) {
         if (i >= arr.length) {
-            return parent;
+            return null;
         }
         Node<E> n = createNode(arr[i], parent, null, null);
         size++;
-        n.setLeft(createLevelOrderHelper(arr, n.left, 2 * i + 1));
-        n.setRight(createLevelOrderHelper(arr, n.right, 2 * i + 2));
+        n.setLeft(createLevelOrderHelper(arr, n, 2 * i + 1));
+        n.setRight(createLevelOrderHelper(arr, n, 2 * i + 2));
         return n;
     }
 
