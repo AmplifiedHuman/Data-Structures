@@ -185,6 +185,7 @@ public class TreeMap<K, V> extends AbstractSortedMap<K, V> {
         checkKey(key);
         Position<Entry<K, V>> searchResult = treeSearch(root(), key);
         // no such key
+        rebalanceAccess(searchResult);
         if (isExternal(searchResult)) {
             return null;
         }
@@ -217,6 +218,7 @@ public class TreeMap<K, V> extends AbstractSortedMap<K, V> {
             // node with same key found
             temp = p.getElement().getValue();
             set(p, newEntry);
+            rebalanceAccess(p);
         }
         return temp;
     }
@@ -238,6 +240,7 @@ public class TreeMap<K, V> extends AbstractSortedMap<K, V> {
         Position<Entry<K, V>> position = treeSearch(root(), key);
         // if not found
         if (isExternal(position)) {
+            rebalanceAccess(position);
             return null;
         }
         V temp = position.getElement().getValue();

@@ -2,8 +2,9 @@ package projectCode20280;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.fail;
 
 class SplayTreeMapTest {
 
@@ -29,7 +30,11 @@ class SplayTreeMapTest {
             map.put(i, Integer.toString(i));
         }
 
-        assertEquals("[1, 2, 4, 5, 12, 15, 21, 23, 24, 26, 33, 35]", map.keySet().toString());
+        Arrays.sort(arr);
+        int i = 0;
+        for (int keyEntry : map.keySet()) {
+            assertEquals(arr[i++], keyEntry);
+        }
     }
 
     @Test
@@ -129,7 +134,13 @@ class SplayTreeMapTest {
 
     @Test
     void testEntrySet() {
-        fail("Not yet implemented");
+        SplayTreeMap<Integer, String> map = new SplayTreeMap<>();
+        Integer[] arr = new Integer[]{35, 26, 15, 24, 33, 4, 12, 1, 23, 21, 2, 5};
+        for (Integer i : arr) {
+            map.put(i, Integer.toString(i));
+        }
+        assertEquals("[<1, 1>, <2, 2>, <4, 4>, <5, 5>, <12, 12>, <15, 15>, <21, 21>, <23, 23>, <24, 24>, " +
+                "<26, 26>, <33, 33>, <35, 35>]", map.entrySet().toString());
     }
 
     @Test
@@ -141,7 +152,8 @@ class SplayTreeMapTest {
         for (Integer i : arr) {
             map.put(i, Integer.toString(i));
         }
-        assertEquals("", map.toString());
+        assertEquals("[<1, 1>, <2, 2>, <4, 4>, <5, 5>, <12, 12>, <15, 15>, <21, 21>, <23, 23>, <24, 24>, " +
+                "<26, 26>, <33, 33>, <35, 35>]", map.toString());
     }
 
     @Test
@@ -155,7 +167,8 @@ class SplayTreeMapTest {
         }
 
         // assertEquals("[12, 15, 21, 23, 24, 26, 33]", map.subMap(12, 34).keySet().toString());
-        assertEquals("[<12, 12>, <15, 15>, <21, 21>, <23, 23>, <24, 24>, <26, 26>, <33, 33>]", map.subMap(12, 34).toString());
+        assertEquals("[<12, 12>, <15, 15>, <21, 21>, <23, 23>, <24, 24>, <26, 26>, <33, 33>]",
+                map.subMap(12, 34).toString());
     }
 
 }
