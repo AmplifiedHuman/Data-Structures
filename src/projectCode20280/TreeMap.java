@@ -38,6 +38,7 @@ public class TreeMap<K, V> extends AbstractSortedMap<K, V> {
         for (Integer i : rands) {
             treeMap.put(i, i);
         }
+        System.out.println(treeMap.size());
         System.out.println(btp.print());
         int random = rands.get(1);
         System.out.println("Removed: " + treeMap.remove(random));
@@ -210,6 +211,8 @@ public class TreeMap<K, V> extends AbstractSortedMap<K, V> {
         // if sentinel node returned
         if (isExternal(p)) {
             expandExternal(p, newEntry);
+            // rebalance tree
+            rebalanceInsert(p);
         } else {
             // node with same key found
             temp = p.getElement().getValue();
@@ -237,19 +240,19 @@ public class TreeMap<K, V> extends AbstractSortedMap<K, V> {
         if (isExternal(position)) {
             return null;
         }
-        // check if there are 2 children
         V temp = position.getElement().getValue();
+        // check if both of its children are not sentinel nodes
         if (isInternal(left(position)) && isInternal(right(position))) {
             Position<Entry<K, V>> swap = treeMax(left(position));
             set(position, swap.getElement());
             position = swap;
         }
-        if (isExternal(left(position))) {
-            remove(left(position));
-        } else {
-            remove(right(position));
-        }
+        Position<Entry<K, V>> leafNode = isExternal(left(position)) ? left(position) : right(position);
+        Position<Entry<K, V>> siblingNode = sibling(leafNode);
+        remove(leafNode);
         remove(position);
+        // we rebalance the whole tree using the remaining sibling node
+        rebalanceDelete(siblingNode);
         return temp;
     }
 
@@ -494,28 +497,21 @@ public class TreeMap<K, V> extends AbstractSortedMap<K, V> {
      * Overrides the TreeMap rebalancing hook that is called after an insertion.
      */
     protected void rebalanceInsert(Position<Entry<K, V>> p) {
-        // TODO Auto-generated method stub
-
     }
 
     /**
      * Overrides the TreeMap rebalancing hook that is called after a deletion.
      */
     protected void rebalanceDelete(Position<Entry<K, V>> p) {
-        // TODO Auto-generated method stub
-
     }
 
     /**
      * Overrides the TreeMap rebalancing hook that is called after a node access.
      */
     protected void rebalanceAccess(Position<Entry<K, V>> p) {
-        // TODO Auto-generated method stub
-
     }
 
     protected void rotate(Position<Entry<K, V>> p) {
-        // TODO
     }
 
 }

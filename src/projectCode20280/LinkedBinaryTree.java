@@ -37,6 +37,7 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
         System.out.println("Tree:\n" + printer.print());
         System.out.println("bt: " + bt.size() + " " + bt);
         System.out.println("inorder: " + bt.inorder());
+        System.out.println("inorder: " + bt.inorder());
     }
 
     /**

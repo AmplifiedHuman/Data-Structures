@@ -22,7 +22,12 @@ public class BalanceableBinaryTree<K, V> extends LinkedBinaryTree<Entry<K, V>> {
      * Relinks a parent node with its oriented child node.
      */
     private void relink(Node<Entry<K, V>> parent, Node<Entry<K, V>> child, boolean makeLeftChild) {
-        // TODO
+        if (makeLeftChild) {
+            parent.setLeft(child);
+        } else {
+            parent.setRight(child);
+        }
+        child.setParent(parent);
     }
 
     /**
@@ -40,7 +45,28 @@ public class BalanceableBinaryTree<K, V> extends LinkedBinaryTree<Entry<K, V>> {
      * Caller should ensure that p is not the root.
      */
     public void rotate(Position<Entry<K, V>> p) {
-        // TODO
+        Node<Entry<K, V>> currentNode = validate(p);
+        Node<Entry<K, V>> parentNode = currentNode.getParent();
+        // might be a null pointer
+        Node<Entry<K, V>> grandparentNode = parentNode.getParent();
+        // first check if parent is root node, if so update root node with current node
+        if (isRoot(parentNode)) {
+            root = currentNode;
+            currentNode.setParent(null);
+        } else {
+            // else relink new child and grandparent node
+            relink(grandparentNode, currentNode, grandparentNode.getLeft() == parentNode);
+        }
+        // if left rotation
+        if (left(parentNode) == currentNode) {
+            Node<Entry<K, V>> curRight = currentNode.getRight();
+            relink(currentNode, parentNode, false);
+            relink(parentNode, curRight, true);
+        } else {
+            Node<Entry<K, V>> curLeft = currentNode.getLeft();
+            relink(currentNode, parentNode, true);
+            relink(parentNode, curLeft, false);
+        }
     }
 
     /**
@@ -72,8 +98,18 @@ public class BalanceableBinaryTree<K, V> extends LinkedBinaryTree<Entry<K, V>> {
      * Caller should ensure that x has a grandparent.
      */
     public Position<Entry<K, V>> restructure(Position<Entry<K, V>> x) {
-        // TODO
-        return null;
+        // checks if only a single rotation is required
+        boolean singleRotation = (left(parent(x)) == x && left(parent(parent(x))) == parent(x)) ||
+                (right(parent(x)) == x && right(parent(parent(x))) == parent(x));
+        if (singleRotation) {
+            Position<Entry<K, V>> newRoot = parent(x);
+            rotate(newRoot);
+            return newRoot;
+        } else {
+            rotate(x);
+            rotate(x);
+            return x;
+        }
     }
 
     // -------------- nested BSTNode class --------------
