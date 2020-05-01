@@ -1,21 +1,21 @@
-package projectCode20280.unitTests;
+package projectCode20280.selfwrittentests;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import projectCode20280.LinkedCircularQueue;
+import projectCode20280.LinkedQueue;
+import projectCode20280.Queue;
 
 import java.util.NoSuchElementException;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
-public class LinkedCircularQueueTest {
-    private LinkedCircularQueue<String> queue;
+public class LinkedQueueTest {
+    private Queue<String> queue;
 
     @BeforeEach
     void init() {
-        queue = new LinkedCircularQueue<>();
+        queue = new LinkedQueue<>();
     }
 
     @Test
@@ -108,21 +108,5 @@ public class LinkedCircularQueueTest {
         Assertions.assertEquals("[a]", queue.toString());
         queue.enqueue("b");
         Assertions.assertEquals("[a, b]", queue.toString());
-    }
-
-    @Test
-    void testRotate() {
-        // insert 3 elements (a-c)
-        for (int i = 0; i < 3; i++) {
-            queue.enqueue(Character.toString('a' + i));
-        }
-        assertEquals("[a, b, c]", queue.toString());
-        // test rotations
-        queue.rotate();
-        assertEquals("[b, c, a]", queue.toString());
-        queue.rotate();
-        assertEquals("[c, a, b]", queue.toString());
-        queue.rotate();
-        assertEquals("[a, b, c]", queue.toString());
     }
 }

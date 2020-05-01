@@ -1,26 +1,39 @@
-package projectCode20280.unitTests;
+package projectCode20280.selfwrittentests;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import projectCode20280.LinkedQueue;
+import projectCode20280.ArrayQueue;
 import projectCode20280.Queue;
 
 import java.util.NoSuchElementException;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
-public class LinkedQueueTest {
+public class ArrayQueueTest {
     private Queue<String> queue;
 
     @BeforeEach
     void init() {
-        queue = new LinkedQueue<>();
+        queue = new ArrayQueue<>(100);
     }
 
     @Test
     void testConstructor() {
         Assertions.assertEquals(0, queue.size());
+        int i = 0;
+        // Check capacity
+        try {
+            while (i < 101) {
+                queue.enqueue("a");
+                i++;
+            }
+            // If while loop completed it means that capacity is wrong
+            fail("Wrong capacity");
+        } catch (RuntimeException ex) {
+            assertEquals(i, 100);
+        }
     }
 
     @Test
@@ -40,6 +53,18 @@ public class LinkedQueueTest {
         queue.enqueue("It's");
         Assertions.assertEquals(queue.first(), "Hello");
         Assertions.assertEquals(2, queue.size());
+
+        queue = new ArrayQueue<>(100);
+        // Try loading the queue to full
+        for (int i = 0; i < 100; i++) {
+            queue.enqueue("a");
+        }
+        try {
+            queue.enqueue("a");
+            fail("Queue should be full");
+        } catch (RuntimeException ex) {
+            // test passed, do nothing
+        }
     }
 
     @Test
@@ -55,7 +80,7 @@ public class LinkedQueueTest {
         try {
             queue.first();
             fail("Removing item does not work");
-        } catch (IndexOutOfBoundsException ex) {
+        } catch (NoSuchElementException ex) {
             // do nothing
         }
         Assertions.assertEquals(queue.size(), 0);
@@ -71,7 +96,7 @@ public class LinkedQueueTest {
         try {
             queue.first();
             fail("Cannot get from illegal index");
-        } catch (IndexOutOfBoundsException ex) {
+        } catch (NoSuchElementException ex) {
             // do nothing
         }
         queue.enqueue("C");
@@ -85,6 +110,7 @@ public class LinkedQueueTest {
         queue.dequeue();
         Assertions.assertEquals(queue.first(), "A");
     }
+
 
     @Test
     void testIterator() {

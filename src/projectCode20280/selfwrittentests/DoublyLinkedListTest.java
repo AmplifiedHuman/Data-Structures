@@ -1,19 +1,19 @@
-package projectCode20280.unitTests;
+package projectCode20280.selfwrittentests;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import projectCode20280.DoublyLinkedList;
 import projectCode20280.List;
-import projectCode20280.SinglyLinkedList;
 
 import java.util.NoSuchElementException;
 
-public class SinglyLinkedListTest {
+public class DoublyLinkedListTest {
     private List<String> list;
 
     @BeforeEach
     void init() {
-        list = new SinglyLinkedList<>();
+        list = new DoublyLinkedList<>();
     }
 
     @Test

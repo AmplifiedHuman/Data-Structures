@@ -277,6 +277,7 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
      * @param p the relevant Position
      * @return element that was removed
      * @throws IllegalArgumentException if p is not a valid Position for this tree.
+     * @throws IllegalArgumentException if p has two children.
      */
     public E remove(Position<E> p) throws IllegalArgumentException {
         Node<E> n = (Node<E>) p;

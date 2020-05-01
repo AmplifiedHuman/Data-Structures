@@ -1,4 +1,4 @@
-package projectCode20280.unitTests;
+package projectCode20280.selfwrittentests;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
