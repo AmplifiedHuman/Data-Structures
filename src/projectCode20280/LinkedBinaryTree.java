@@ -29,6 +29,9 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
         System.out.println("inorder: " + bt.inorder());
         System.out.println("preorder: " + bt.preorder());
         System.out.println("postorder: " + bt.postorder());
+        System.out.println("symmetric: " + bt.isSymmetric());
+        bt.mirror();
+        System.out.println("Mirror Tree:\n" + printer.print());
         bt.clear();
         // construct binary tree of 3 elements, uses addLeft and addRight
         bt.addRoot(5);
@@ -37,7 +40,10 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
         System.out.println("Tree:\n" + printer.print());
         System.out.println("bt: " + bt.size() + " " + bt);
         System.out.println("inorder: " + bt.inorder());
-        System.out.println("inorder: " + bt.inorder());
+        System.out.println("postorder: " + bt.postorder());
+        System.out.println("symmetric: " + bt.isSymmetric());
+        bt.mirror();
+        System.out.println("Mirror Tree:\n" + printer.print());
     }
 
     /**
@@ -196,6 +202,7 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
             throw new IllegalArgumentException("p already has a left child");
         }
         node.setLeft(createNode(e, node, null, null));
+        node.getLeft().setParent(node);
         size++;
         return node.getLeft();
     }
@@ -215,6 +222,7 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
             throw new IllegalArgumentException("p already has a left child");
         }
         node.setRight(createNode(e, node, null, null));
+        node.getRight().setParent(node);
         size++;
         return node.getRight();
     }
@@ -311,6 +319,99 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
         sb.append("]");
         return sb.toString();
     }
+
+    /**
+     * Checks if tree is symmetric
+     *
+     * @return true if tree is symmetric
+     */
+    public boolean isSymmetric() {
+        // empty tree symmetric by definition (can be changed to return true)
+        if (root == null) {
+            return true;
+        }
+        return symmetricHelper(root.left, root.right);
+    }
+
+
+    // check if two sub trees are symmetric
+    private boolean symmetricHelper(Node<E> firstNode, Node<E> secondNode) {
+        // base case: check if one of the subtrees is null, they are only symmetric if both subtrees are null
+        if (firstNode == null || secondNode == null) {
+            return firstNode == null && secondNode == null;
+        }
+        // checks symmetry for their mirroring subtree
+        return symmetricHelper(firstNode.left, secondNode.right) && symmetricHelper(firstNode.right, secondNode.left);
+    }
+
+    /**
+     * Converts binary tree to mirror image
+     */
+    public void mirror() {
+        root = mirrorHelper(root);
+    }
+
+    private Node<E> mirrorHelper(Node<E> node) {
+        // base case: if node is null or an external node, mirror image is the same
+        if (node == null || isExternal(node)) {
+            return node;
+        }
+        Node<E> temp = node.right;
+        node.right = mirrorHelper(node.left);
+        node.left = mirrorHelper(temp);
+        return node;
+    }
+
+
+    public int distanceBetweenNodes(Position<E> firstPosition, Position<E> secondPosition) {
+        // check if nodes are valid
+        Node<E> firstNode = validate(firstPosition);
+        Node<E> secondNode = validate(secondPosition);
+        Node<E> ancestor = findLeastCommonAncestor(root, firstNode, secondNode);
+        System.out.println("Ancestor: " + ancestor.getElement());
+        // return sum of distance to ancestor
+        return getLevel(ancestor, firstNode, 0) + getLevel(ancestor, secondNode, 0);
+    }
+
+    // find distance of node to pointer
+    private int getLevel(Node<E> pointer, Node<E> node, int level) {
+        validate(node);
+        // if pointer is null, leaf reached, return -1
+        if (pointer == null) {
+            return -1;
+        }
+        // if node is equal to pointer return current level
+        if (pointer == node) {
+            return level;
+        }
+        int left = getLevel(pointer.left, node, level + 1);
+        // if level is not -1, node found return level
+        if (left != -1) {
+            return left;
+        }
+        // else search on right subtree
+        return getLevel(pointer.right, node, level + 1);
+    }
+
+    private Node<E> findLeastCommonAncestor(Node<E> pointer, Node<E> firstNode, Node<E> secondNode) {
+        // if pointer is null, leaf reached, return null
+        if (pointer == null) {
+            return null;
+        }
+        // if pointer is equal to first node or second node return pointer
+        if (pointer == firstNode || pointer == secondNode) {
+            return pointer;
+        }
+        // find if ancestor exist in left and right subtree
+        Node<E> left = findLeastCommonAncestor(pointer.left, firstNode, secondNode);
+        Node<E> right = findLeastCommonAncestor(pointer.right, firstNode, secondNode);
+        // find found on both subtrees, means that it must pass through root
+        if (left != null && right != null) {
+            return pointer;
+        }
+        return left == null ? right : left;
+    }
+
 
     /**
      * Clears a binary tree
