@@ -4,7 +4,7 @@ package projectCode20280;
  * Interface for the priority queue ADT.
  * The keys in the PQ must extend the Comparable interface so that they can be compared
  */
-public interface PriorityQueue<K extends Comparable<K>, V> {
+public interface PriorityQueue<K, V> {
 
     /**
      * Returns the number of items in the priority queue.

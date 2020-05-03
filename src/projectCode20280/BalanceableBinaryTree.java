@@ -1,6 +1,12 @@
 package projectCode20280;
 
-
+/**
+ * Core data structure for AVL Trees and SplayTrees, added rotating/balancing methods, extends the LinkedBinaryTree
+ * class.
+ *
+ * @param <K> key
+ * @param <V> value
+ */
 public class BalanceableBinaryTree<K, V> extends LinkedBinaryTree<Entry<K, V>> {
     // positional-based methods related to aux field
     public int getAux(Position<Entry<K, V>> p) {

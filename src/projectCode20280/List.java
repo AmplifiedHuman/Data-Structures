@@ -10,6 +10,11 @@ package projectCode20280;
 
 import java.util.Iterator;
 
+/**
+ * The List interface supports common list methods that can be used by it's subclasses
+ *
+ * @param <E> an arbitrary type
+ */
 public interface List<E> extends Iterable<E> {
 
     int size();

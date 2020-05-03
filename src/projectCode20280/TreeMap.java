@@ -6,7 +6,7 @@ import java.util.Random;
 import java.util.stream.Collectors;
 
 /**
- * An implementation of a sorted map using a binary search tree.
+ * An implementation of a sorted map using a binary search tree, extends the Abstract Sorted Map class
  */
 
 public class TreeMap<K, V> extends AbstractSortedMap<K, V> {

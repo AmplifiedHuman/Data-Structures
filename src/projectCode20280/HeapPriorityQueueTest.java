@@ -34,7 +34,9 @@ class HeapPriorityQueueTest {
         for (Integer i : arr) pq.insert(i, Integer.toString(i));
 
         assertEquals(12, pq.size());
-        assertEquals("[1, 2, 5, 23, 4, 12, 15, 35, 24, 33, 21, 26]", pq.toString());
+        // modified to include values
+        assertEquals("[1:1, 2:2, 5:5, 23:23, 4:4, 12:12, 15:15, 35:35, 24:24, 33:33, 21:21, 26:26]",
+                pq.toString());
 
     }
 
@@ -56,8 +58,9 @@ class HeapPriorityQueueTest {
         HeapPriorityQueue<Integer, String> pq = new HeapPriorityQueue<>();
 
         for (Integer i : arr) pq.insert(i, Integer.toString(i));
-
-        assertEquals("[1, 2, 5, 23, 4, 12, 15, 35, 24, 33, 21, 26]", pq.toString());
+        // modified to include values
+        assertEquals("[1:1, 2:2, 5:5, 23:23, 4:4, 12:12, 15:15, 35:35, 24:24, 33:33, 21:21, 26:26]",
+                pq.toString());
     }
 
 }

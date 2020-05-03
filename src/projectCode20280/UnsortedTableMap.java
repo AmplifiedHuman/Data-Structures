@@ -7,6 +7,7 @@ import java.util.NoSuchElementException;
 /**
  * An implementation of a map using an unsorted table.
  * It extends the AbstractMap Interface and uses an Java ArrayList (with auto-resizing as it core data structure)
+ * It also extends the AbstractMap class
  */
 
 public class UnsortedTableMap<K, V> extends AbstractMap<K, V> {

@@ -11,7 +11,7 @@ import java.util.Comparator;
  * provides a boolean checkKey method that verifies that a given key is appropriate for use with the
  * comparator 4) It provides an isEmpty implementation based upon the abstract size() method.
  */
-public abstract class AbstractPriorityQueue<K extends Comparable<K>, V>
+public abstract class AbstractPriorityQueue<K, V>
         implements PriorityQueue<K, V> {
     // ---------------- nested PQEntry class ----------------
 

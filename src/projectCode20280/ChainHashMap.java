@@ -1,7 +1,7 @@
 package projectCode20280;
 
 /*
- * Map implementation using hash table with separate chaining.
+ * Map implementation using hash table with separate chaining, extends the AbstractHashMap class.
  */
 
 import java.util.ArrayList;

@@ -3,7 +3,11 @@ package projectCode20280;
 import java.util.Comparator;
 
 /**
- * An implementation of a sorted map using an AVL tree.
+ * An implementation of AVL Tree Map by using a Balanceable Binary Tree as its core data structure, extends the TreeMap
+ * class
+ *
+ * @param <K> key
+ * @param <V> value
  */
 
 public class AVLTreeMap<K, V> extends TreeMap<K, V> {

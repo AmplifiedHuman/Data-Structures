@@ -2,6 +2,14 @@ package projectCode20280;
 
 import java.util.Comparator;
 
+/**
+ * An implementation of Splay Tree by using a Balanceable Binary Tree as its core data structure, extends the TreeMap
+ * class
+ *
+ * @param <K> key
+ * @param <V> value
+ */
+
 public class SplayTreeMap<K, V> extends TreeMap<K, V> {
 
     protected BalanceableBinaryTree<K, V> modifiedTree;
